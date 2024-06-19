@@ -1,0 +1,54 @@
+kubernetes : 
+
+Imagine you’re a director of a play. In Kubernetes, the “play” is your application, 
+and the “actors” are the different parts of your application (like databases, servers, etc.).
+ These actors are what Kubernetes refers to as “objects”.
+
+Now, as a director, you need a script for your play. This script tells each actor what their role is,
+ and how they should perform it.
+  In Kubernetes, this “script” is called an “object spec”. 
+  It describes the desired state of your objects - in other words, how you want your application to run.
+
+But how do you give this script to your actors? You could tell them directly,
+ but that would be time-consuming and prone to errors. 
+ Instead, you write down the script in a file and give it to them.
+  In Kubernetes, this file is known as a “manifest”.
+   It’s usually written in a language called YAML, but you can also use JSON.
+
+Finally, you need a way to start the play.
+ In Kubernetes, this is done using a command-line tool called kubectl. 
+ You give kubectl your manifest, and it communicates with Kubernetes to start your application according to the script.
+
+In summary, when you want to run an application in Kubernetes, you describe how you want it to run in a manifest file,
+ and then use kubectl to start it. This process is like a director using a script to direct a play.
+
+
+•••••••••••••••>>>> Kubernetes Manages pods instead of managing container directly 
+
+
+
+
+
+
+For a YAML file we need three important fields : 
+apiVersion: 
+kind: What kind of object you want to create 
+metadata: Data that helps uniquely identify the object,
+spec:
+
+
+spec tells us how the object should look like when its up and running 
+
+The spec for a Pod might include things like:
+
+The container image to use
+The ports to expose
+The volume mounts
+
+
+
+[[StateFul application in kubernetes]]
+
+**  it remembers its state from one session to another. so even if something goes wrong it can pick up where it 
+    left off
+

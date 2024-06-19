@@ -1,0 +1,238 @@
+public: An access modifier that makes the main method accessible from anywhere.
+static: A keyword that allows the main method to be called without having to instantiate the class.
+void: This specifies that the main method does not return any .
+main: The name of the method that is the entry point for any Java application.
+String args[]: The parameter for the main method, which can accept an array of strings from the command line.
+
+
+ Day[] DayNow = Day.values();
+ 
+ Day[]: An array type that can hold elements of the Day enum
+ 
+ 
+ 
+	DayNow: The name of the variable.
+	Day.values(): A method call that returns all the values of the Day enum as an array.
+	
+	value
+	
+	OOPs in Java
+	
+	Encapsulation === > Binding Code And data in a single unit 
+	Abstraction  ==== > Hiding Internal Details and showing important Data 
+	Polymorphism ==== > One Task in Different Ways 
+	Inheritance ===== > One object acquires properties and behaviour of another object 
+	
+	
+	
+	
+	
+--->If you define multiple classes in a single Java source file, 
+	it is a good idea to save the file name with the class name which has main() method.
+	
+	
+	
+	
+	
+	
+*****()()()()
+
+3 Ways to initialize object
+There are 3 ways to initialize object in Java.
+😊By reference variable
+😊By method
+😊By constructor
+	
+*****()()()()()	
+	
+---------------------------------------
+	
+By reference variable : = 
+
+**
+
+class Student{  
+ int id;  
+ String name;  
+} 
+
+** 
+
+*****
+ Student s1=new Student();  
+  s1.id=101;  
+  s1.name="Sonoo";  
+*****
+
+---------------------------------------
+
+
+
+---------------------------------------
+
+
+•••••>>>Initialization through method : =
+
+
+class Student{  
+ int rollno;  
+ String name;  
+ void insertRecord(int r, String n){  
+  rollno=r;  
+  name=n;  
+ }  
+ void displayInformation(){System.out.println(rollno+" "+name);}  
+}  
+class TestStudent4{  
+ public static void main(String args[]){  
+  Student s1=new Student();  
+  Student s2=new Student();  
+  s1.insertRecord(111,"Karan");  
+  s2.insertRecord(222,"Aryan");  
+  s1.displayInformation();  
+  s2.displayInformation();  
+ }  
+ 
+ 
+-----------------------------------------
+
+
+
+
+This Keyword  in JAVA : =====
+
+
+•••••==>>  this: 		to refer current class instance variable
+•••••==>>  this: 		to invoke current class method
+•••••==>>  this() : 	to invoke current class constructor	
+				**Calling default constructor from parameterized constructor:
+				class A{  
+					A()
+					{
+						System.out.println("hello a");
+					}  
+					A(int x)
+					{  
+					this();  
+					System.out.println(x);  
+					}  
+				}
+				
+				
+				
+				
+				**Calling parameterized constructor from default constructor:
+				class A{  
+					A(){  
+					this(5);  
+					System.out.println("hello a");  
+					}  
+					A(int x){  
+					System.out.println(x);  
+					}  
+					}  
+					
+
+
+•••••==>>[---Method Over Riding---]  :==
+
+If subclass (child class) has the same method as declared in the parent class, it is known as method overriding in Java.
+
+
+
+
+//Java Program to demonstrate the real scenario of Java Method Overriding  
+//where three classes are overriding the method of a parent class.  
+//Creating a parent class.  
+
+class Bank{  
+int getRateOfInterest(){return 0;}  
+}  
+//Creating child classes.  
+class SBI extends Bank{  
+int getRateOfInterest(){return 8;}  
+}  
+  
+class ICICI extends Bank{  
+int getRateOfInterest(){return 7;}  
+}  
+class AXIS extends Bank{  
+int getRateOfInterest(){return 9;}  
+}  
+//Test class to create objects and call the methods  
+class Test2{  
+public static void main(String args[]){  
+SBI s=new SBI();  
+ICICI i=new ICICI();  
+AXIS a=new AXIS();  
+System.out.println("SBI Rate of Interest: "+s.getRateOfInterest());  
+System.out.println("ICICI Rate of Interest: "+i.getRateOfInterest());  
+System.out.println("AXIS Rate of Interest: "+a.getRateOfInterest());  
+}  
+}  
+
+
+
+•••••==>>	Can we override static method?
+No, a static method cannot be overridden. It can be proved by runtime polymorphism, so we will learn it later.
+
+
+
+
+•••••==>>	Why can we not override static method?
+It is because the static method is bound with class whereas instance method is bound with an object.
+Static belongs to the class area, and an instance belongs to the heap area.
+
+
+jj
+
+
+[[[[••••Super Keyword in Java••••]]]]
+
+••>>super can be used to refer immediate parent class instance variable.
+••>>super can be used to invoke immediate parent class method.
+••>>super() can be used to invoke immediate parent class constructor.
+
+
+dd
+
+[[[[••••Instance Initialiser Block••••]]]]
+it is a block of code that is executed each time an object is created .
+
+class Bike7{  
+    int speed;  
+      
+    Bike7(){System.out.println("speed is "+speed);}  
+   
+    {speed=100;}  
+       
+    public static void main(String args[]){  
+    Bike7 b1=new Bike7();  
+    Bike7 b2=new Bike7();  
+    }      
+} 
+
+(((Rules for instance Initialiser block))) 
+••>> The instance initializer block is created when instance of the class is created.
+••>> The instance initializer block is invoked after the parent class constructor is invoked (i.e. after super() constructor call).
+••>> The instance initializer block comes in the order in which they appear.
+
+
+
+
+
+
+
+
+
+
+
+
+
+[[[•••Final Keyword In Java•••]]]
+
+Stop Value Change 
+Stop Method Overriding
+Stop Inheritance
+
+

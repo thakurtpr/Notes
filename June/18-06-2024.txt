@@ -1,0 +1,49 @@
+
+
+1) Ingress:
+
+
+Before we are having ratio  based load balancing 
+we are having whitelisting and blacklisting feature in load balancing 
+
+
+
+for every service we have to define different ip's 
+as a result gcp was charing for each of these ip's  (statis load balancer ip's)
+this problem is solved by ingress
+
+Load Balancing : Round Robin
+ProblemS: 
+1)Enterprise & TLS Load Balancing 
+2)Static Load Balancer  ::::::::::::::::::[][][][][[][][][[][][][: 
+
+How ingress Solves this Problems : 
+ Create a Resource Called Ingress Resource : 
+	Ingress Controller Will search for the ingress yaml resource for their k8s services  it will provide the path based routing 
+	
+	
+	Host Based , Path Based , TLS  Based Routing 
+	
+	
+	installing ingress controller---------------------->>>>>> making an ingress resource --------------->>>>>>>>>
+	
+	
+	***** vim ingress.yaml
+	(*) kubectl apply ingress.yaml
+	(*) minikube enable ingress  --->> this will create an ingress resource of type nginx 
+	(*) kubectl get pods -A | grep ingress 
+	(*) kubectl logs ingress-nginx-controller-cc8496874-trh6c -n ingress-nginx 
+	(*) 
+	
+	
+	
+	Install ingress Controller --> Nginx Ingress controller will watch for the ingress Resource --> it then updated the nginx.conf -->>
+	
+	
+	
+	Notes:=   ****Along with the ingress controller nginx application is also deployed****
+	
+	
+	(*) SSL Passthrough : = 
+	(*) SSL offloading : = https request is decrypted by the load balancer and then http request is sent to the application in plain text 
+	(*) SSL Briding : = it decrypts the data and then send by re-encrypt the data and then send the request to the application 
