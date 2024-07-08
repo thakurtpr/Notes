@@ -1,0 +1,379 @@
+*******************************
+INPUT OUTPUT IN JAVA 
+*******************************
+
+
+
+(*)->>  public static void main(String[] args) 
+        throws IOException 
+        {}
+
+this means when the main method will be called by JVM it will handle the exception :using inbuilt try and catch 
+or else error 
+
+
+(*)->>Reading Data :: | | :: Taking Input In java 
+
+•••••••••••••••••••••••••••••••••••••••
+Ways to read input from console in Java
+•••••••••••••••••••••••••••••••••••••••
+using buffered reader and scanner :=>
+•••••••••••••••••••••••••••••••••••••••
+
+
+
+
+•••••••••••••USING SCANNER CLASS•••••••••••••
+import java.util.Scanner;
+ 
+// Main class
+class GFG {
+ 
+    // Main driver method
+    public static void main(String args[])
+    {
+ 
+        // Creating object of Scanner class to
+        // read input from keyboard
+        Scanner scn = new Scanner(System.in);
+ 
+        System.out.println("Enter an integer & a String");
+ 
+        // Using nextInt() to parse integer values
+        int a = scn.nextInt();
+ 
+        // Using nextLine() to parse string values
+        String b = scn.nextLine();
+ 
+        // Display name and age entered above
+        System.out.printf("You have entered:- " + a + " " + "and name as " + b);
+    }
+}
+
+•••••••••••••••••••••••••••••••••••••••••
+
+
+•••••••••••••••USING BUFFERED READER CLASS•••••••••••••
+
+import java.io.*;
+
+// Main class
+class GFG {
+
+	// Main driver method
+	public static void main(String args[])
+		throws IOException
+	{
+
+		// Creating object of class inside main() method
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		System.out.println("Enter an integer");
+
+		// Taking integer input
+		int a = Integer.parseInt(br.readLine());
+
+		System.out.println("Enter a String");
+
+		String b = br.readLine();
+
+		// Printing input entities above
+		System.out.printf("You have entered:- " + a + " and name as " + b);
+	}
+}
+
+•••••••••••••••••••••••••••••••••••••••••••••••
+
+
+•••••••••••••••••Using Console Class••••••••••••••••
+
+
+public class Sample {
+    public static void main(String[] args)
+    {
+        // Using Console to input data from user
+        String name = System.console().readLine();
+
+        System.out.println("You entered string " + name);
+    }
+}
+
+
+•••••••••••••••••••••••••••••••••••••••••••••••••••
+
+
+•••••••••••••••••••Using Command line argument••••••••••••••••••••••••
+
+class Hello {
+    public static void main(String[] args)
+    {
+        // check if length of args array is
+        // greater than 0
+        if (args.length > 0) {
+            System.out.println(
+                "The command line arguments are:");
+
+            // iterating the args array and printing
+            // the command line arguments
+            for (String val : args)
+                System.out.println(val);
+        }
+        else
+            System.out.println("No command line " + "arguments found.");
+    }
+}
+
+
+•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+
+
+
+••••••••••••••••••••••Using DataInputStream class•••••••••••••••••••••••
+
+import java.io.*;
+
+public class Main {
+    public static void main(String[] args) throws IOException {
+        DataInputStream reader = new DataInputStream(System.in);
+        
+        // Reading integers
+        System.out.print("Enter an integer: ");
+        int inputInt = Integer.parseInt(reader.readLine());
+        
+        // Reading strings
+        System.out.print("Enter a string: ");
+        String inputString = reader.readLine();
+        System.out.println("You entered integer: " + inputInt);
+        System.out.println("You entered string: " + inputString);
+        
+    }
+}
+
+
+••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+
+
+
+
+••••••••••••••••••Formatted Output in Java using printf()••••••••••••••••••
+
+---------------------------------------------------------------------------
+(i). For Number Formatting
+
+     System.out.printf("%,d%n",a); 
+---------------------------------------------------------------------------
+(ii). For Decimal Number Formatting
+
+        System.out.printf("%f\n", a); 
+        System.out.printf("%5.3f\n", a); 
+        System.out.printf("%5.2f\n", a); 
+
+3.141593
+3.142
+3.14
+---------------------------------------------------------------------------
+(iii). For Boolean Formatting
+
+        int a = 10; 
+        Boolean b = true, c = false; 
+        Integer d = null; 
+  
+        // Fromatting Done using printf 
+        System.out.printf("%b\n", a); 
+        System.out.printf("%B\n", b); 
+        System.out.printf("%b\n", c); 
+        System.out.printf("%B\n", d); 
+
+true
+TRUE
+false
+FALSE
+---------------------------------------------------------------------------
+(iv). For Char Formatting
+        char c = 'g'; 
+  
+        // Formatting Done 
+        System.out.printf("%c\n", c); 
+  
+        // Converting into Uppercase 
+        System.out.printf("%C\n", c); 
+
+g
+G
+---------------------------------------------------------------------------
+(v). For String Formatting
+
+        String str = "geeksforgeeks"; 
+  
+        // Formatting from lowercase to 
+        // Uppercase 
+        System.out.printf("%s \n", str); 
+        System.out.printf("%S \n", str); 
+  
+        str = "GFG"; 
+        // Vice-versa not possible 
+        System.out.printf("%S \n", str); 
+        System.out.printf("%s \n", str); 
+    
+geeksforgeeks 
+GEEKSFORGEEKS 
+GFG 
+GFG 
+---------------------------------------------------------------------------
+(vi). For Date and Time Formatting
+
+        Date time = new Date(); 
+  
+        System.out.printf("Current Time: %tT\n", time); 
+  
+        // Another Method with all of them Hour 
+        // minutes and seconds seperated 
+        System.out.printf("Hours: %tH  Minutes: %tM Seconds: %tS\n",  
+                          time,time, time); 
+  
+        // Another Method to print the time 
+        // Followed by am/pm , time in milliseconds 
+        // nanoseconds and time-zone offset 
+        System.out.printf("%1$tH:%1$tM:%1$tS %1$tp %1$tL %1$tN %1$tz %n", time); 
+
+
+Current Time: 11:32:36
+Hours: 11  Minutes: 32 Seconds: 36
+11:32:36 am 198 198000000 +0000 
+---------------------------------------------------------------------------
+
+•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+
+
+*******************************
+For-each loop in Java
+*******************************
+
+
+•••••••••••••••••••••••••••••••••••••••For-each loop in Java•••••••••••••••••••••••••••••••••••••••
+
+  
+
+import java.io.*; 
+
+class Easy 
+
+{ 
+
+	public static void main(String[] args) 
+
+	{ 
+
+		// array declaration 
+
+		int ar[] = { 10, 50, 60, 80, 90 }; 
+
+		for (int element : ar) 
+
+			System.out.print(element + " "); 
+	} 
+}
+
+
+
+•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+
+
+
+
+*******************************
+Immutable String in Java
+*******************************
+•••••••••••••••••••••Immutable String in Java•••••••••••••••••••••
+
+// Java Program to demonstrate Immutable String in Java
+import java.io.*;
+
+class GFG {
+    public static void main(String[] args)
+    {
+        String s = "Sachin";
+    
+        // concat() method appends
+        // the string at the end
+        s.concat(" Tendulkar");
+    
+        // This will print Sachin
+        // because strings are
+        // immutable objects
+        System.out.println(s);
+    }
+}
+
+Output
+Sachin
+
+
+Here Sachin is not changed but a new object is created with “Sachin Tendulkar”. That is why
+a string is known as immutable.
+
+As you can see in the given figure that two objects are created but s reference variable still refers to “Sachin”  
+and not to “Sachin Tendulkar”. But if we explicitly assign it to the reference variable, it will refer to 
+the “Sachin Tendulkar” object.   
+
+
+
+// Java Program to demonstrate Explicitly assigned strings
+import java.io.*;
+
+class GFG {
+    public static void main(String[] args)
+    {
+        String name = "Sachin";
+        name = name.concat(" Tendulkar");
+        System.out.println(name);
+    }
+}
+
+
+•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+
+
+
+<<<<<<<<<<<<====::::::::::::STRINGS ARE IMMUATABLE IN JAVA :::::::::::::====>>>>>>>>>>>>
+
+
+
+String query = "SELECT * FROM users WHERE username = '";
+String username = getUserInput(); // User-provided input
+query += username + "'";
+
+
+If username was mutable, an attacker could change its value after it has been validated 
+and appended to the query. For example, an attacker could set username to something malicious
+after the query string has been partially built.
+
+username.setValue("admin' OR '1'='1");
+
+This would result in the final query being
+
+"SELECT * FROM users WHERE username = 'admin' OR '1'='1'"
+
+The above query is always true and could give the attacker access to all user records.
+
+Because strings are immutable, once the username string is appended to the query string, it cannot be changed. 
+This means the original intent of the SQL query cannot be altered by changing the username string after 
+it has been appended.
+
+<<<<<<<<<<<<====:::::::::::::....................::::::::::::====>>>>>>>>>>>>
+
+
+
+-------------------------------------------------------------------------------------------
+
+*****JAGGED ARRAYS*****
+A jagged array is an array of arrays suh that member arrays can be of different sizes,
+i.e., we can create a 2-D array but with a variable number of columns in each row.
+These types of arrays are also known as Jagged arrays.
+
+
+-------------------------------------------------------------------------------------------
+
+
+
+
+
