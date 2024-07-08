@@ -1,0 +1,40 @@
+Ansible ::::::
+
+(*):======Password Less Authentication := 
+ Copied the Public Ip address Of ansible server to the Authorized Key in the target Server : 
+ 
+ 
+ 
+ inventory file := its a file that stores the ip address of the target server 
+ grouping is also done in inventory file 
+ 
+ **Ansible Playbook  (whole script)
+ **Ansible Adhoc Commands (commands)
+ 
+
+
+ ansible -i inventory (ip address of target server) -m "shell" -a "touch devOps"
+ 
+ 
+ 
+ -m:=module 
+ -a:=arguments
+ inventory:=(file_name)
+
+ 
+ Ansible Plabook 
+---
+- name: Install and start nginx 
+  hosts: all
+  become: root 
+
+  tasks:
+   - name: Install nginx 
+    (shell: apt install nginx) //this and below are same  but to keep it generic we write below things 
+     apt:
+       name: nginx 
+       state: present
+   - name: Start nginx 
+     
+ 
+ 

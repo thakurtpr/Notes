@@ -1,0 +1,11 @@
+Istio ::: 
+
+Not a part of kubernetes but works alongside kubernetes
+
+service mesh technology __(*)
+
+
+(*):::-->>Service Mesh & Istio 
+
+
+
