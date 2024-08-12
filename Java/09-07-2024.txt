@@ -1,0 +1,146 @@
+***********************
+INTERFACE IN JAVA 
+***********************
+
+
+An interface in Java is a blueprint of a class. It has static constants and abstract methods.
+
+
+interface Drawable{  
+    void draw();  
+}  
+
+
+//Implementation: by second user  
+class Rectangle implements Drawable{  
+    public void draw(){System.out.println("drawing rectangle");}  
+}  
+
+
+class Circle implements Drawable{  
+    public void draw(){System.out.println("drawing circle");}  
+}  
+
+//Using interface: by third user  
+class TestInterface1{  
+    public static void main(String args[]){  
+    Drawable d=new Circle();//In real scenario, object is provided by method e.g. getDrawable()  
+    d.draw();  
+}}  
+
+
+
+
+Multiple inheritance is not possible by class but its possible by Interface 
+--------------------------
+EXAMPLE 1:::::::
+---------------------------
+interface Printable{  
+    void print();  
+}  
+interface Showable{  
+    void print();  
+}  
+  
+class TestInterface3 implements Printable, Showable{  
+    public void print(){System.out.println("Hello");}  
+    public static void main(String args[]){  
+    TestInterface3 obj = new TestInterface3();  
+    obj.print();  
+ }  
+}  
+--------------------------
+EXAMPLE 2:::::::
+---------------------------
+interface test{
+    void print();
+}
+
+interface test2 {
+    void printx();
+
+
+}
+class testfinal implements test,test2{
+    public void print(){
+        System.out.println("hello");
+    }
+    public void printx(){
+        System.out.println("HI");
+    }
+
+
+    public static void main(String[] args) {
+        test tr = new testfinal();
+        tr.print();
+        test2 trt = new testfinal();
+        trt.printx();
+
+    }
+}
+
+
+
+
+••••••••••••••••••••••••••••••
+Default Method In Interface
+••••••••••••••••••••••••••••••
+
+interface Drawable{  
+    void draw();  
+    default void msg(){
+        System.out.println("default method");
+    }  
+}  
+class Rectangle implements Drawable{  
+    public void draw(){
+        System.out.println("drawing rectangle");
+    }  
+}  
+class TestInterfaceDefault{  
+    public static void main(String args[]){  
+        Drawable d=new Rectangle();  
+        d.draw();  
+        d.msg();  
+    }
+} 
+
+
+(((((((NNNNNNNNNNOOOOOOOOOOOOTEEEEEEEEEEEEEEEEEE)))))))
+ Multiple inheritance is not supported through class in java, but it is possible by an interface, why?
+
+••••••••••••••••••••••••••••••
+ABSTRACTION
+••••••••••••••••••••••••••••••
+
+
+------------------------------
+Abstract Class••••••••••••••••
+------------------------------
+
+Abstraction is a process of hiding the implementation details and showing only functionality to the u
+
+abstract class Shape{  
+    abstract void draw();  
+}  
+//In real scenario, implementation is provided by others i.e. unknown by end user  
+class Rectangle extends Shape{  
+    void draw(){System.out.println("drawing rectangle");}  
+}  
+class Circle1 extends Shape{  
+    void draw(){System.out.println("drawing circle");}  
+}  
+//In real scenario, method is called by programmer or user  
+class TestAbstraction1{  
+    public static void main(String args[]){  
+    Shape s=new Circle1();//In a real scenario, object is provided through method, e.g., getShape() method  
+    s.draw();  
+}  
+}  
+
+
+
+
+
+
+

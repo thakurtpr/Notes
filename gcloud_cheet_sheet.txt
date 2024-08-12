@@ -1,0 +1,12 @@
+<<-----General Commands----->>>
+
+gcloud init  ---  Initializes the gcloud CLI and sets up authentication and default configurations.
+
+gcloud config set project PROJECT_ID  ---  Sets the default project for the gcloud CLI.
+
+gcloud auth list --- Lists the active account and all available accounts.
+
+gcloud auth login  ---   Authorizes gcloud to access your Google Cloud account.
+
+gcloud builds submit --tag gcr.io/project-id/name  ---  build the docker image and push it to the container registry 
+
