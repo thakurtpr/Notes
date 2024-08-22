@@ -1,0 +1,21 @@
+<------Encryption------->
+
+key:======================
+base64 decode for the key 
+
+generates a random IV of 16 bytes 
+
+
+Request Body:=============
+marshalled into bytes and stored in a cipher block i.e multiple of 16
+
+cbc encryptor is used to encrypt the bytes
+
+
+
+
+
+
+
+
+ 

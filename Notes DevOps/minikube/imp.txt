@@ -1,0 +1,14 @@
+kubectl set image deployment/on-prem-auth on-prem-auth=localhost:5000/on-prem-auth
+
+kubectl set image deployment/on-prem-redirect on-prem-auth=localhost:5000/on-prem-redirect
+
+kubectl port-forward -n gateway service/redirectionapp-service 31893:80
+
+nodeport:= 31893
+servicePort:= 80
+
+accessing from postman http://localhost:8000/
+
+Forwarding from 127.0.0.1:31893 -> 8000
+
+Forwarding from [::1]:31893 -> 8000

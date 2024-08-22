@@ -1,0 +1,43 @@
+
+<<<<<<<---------Elasticsearch Endpoints------->>>>>>>>>
+
+
+A wealth of information! Elasticsearch provides numerous endpoints to interact with your data. Here are some essential endpoints to get you started:
+
+<=======Indexing Data======>
+PUT /{index}: Create an index with optional settings and mappings.
+PUT /{index}/_doc/{id}: Index a document with a specified ID.
+POST /{index}/_doc/: Index a document without specifying an ID (Elasticsearch generates one).
+
+
+<=======Retrieving Data======>
+GET /{index}/_doc/{id}: Retrieve a document by ID.
+GET /{index}/_search: Search for documents using a query.
+GET /{index}/_search?q={query}: Search for documents using a query string.
+
+
+<=======Updating Data======>
+POST /{index}/_update/{id}: Update a document by ID.
+POST /{index}/_update/_doc/{id}: Update a document by ID (alternative syntax).
+
+
+<=======Deleting Data======>
+DELETE /{index}/_doc/{id}: Delete a document by ID.
+DELETE /{index}: Delete an entire index.
+
+
+<=======Other Endpoints======>
+GET /_health: Check the health of your Elasticsearch cluster.
+GET /_cluster/state: Retrieve cluster state information.
+GET /_nodes: Retrieve information about nodes in your cluster.
+GET /_settings: Retrieve settings for your cluster or index.
+
+
+When running Elasticsearch in Docker, you'll need to access these endpoints using the container's IP address or hostname,
+followed by the port number (default is 9200). For example:
+http://localhost:9200/myindex/_doc/1
+
+
+Replace localhost with the IP address or hostname of your Docker container.
+Please note that this is not an exhaustive list, and Elasticsearch provides many more endpoints for advanced use cases. 
+You can find the complete documentation on the official Elasticsearch website.
