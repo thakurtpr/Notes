@@ -1,0 +1,33 @@
+<---------Basics--------->
+
+A list in C++ STL (Standard Template Library) is a dynamic data structure that allows 
+efficient insertion and deletion of elements at any position.
+It is a doubly-linked list, meaning each element points to both the previous and next element.
+
+<---------Basics--------->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

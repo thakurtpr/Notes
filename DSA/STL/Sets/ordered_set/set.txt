@@ -1,0 +1,45 @@
+<<--------Basics------->>
+
+An ordered set is a container that stores unique elements in a sorted order. 
+It is implemented as a binary search tree (typically a red-black tree), 
+which allows for efficient insertion, deletion, and search operations.
+
+There are several ordered set containers available in C++:
+std::set: A set is an ordered container that stores unique elements in a sorted order. 
+It uses a binary search tree (typically a red-black tree) to store elements.
+std::multiset: A multiset is similar to a set, but it allows duplicate elements.
+std::map: A map is an ordered container that stores key-value pairs in a sorted order based on the keys.
+std::multimap: A multimap is similar to a map, but it allows duplicate keys.
+std::ordered_set (C++23): An ordered_set is a new container introduced in C++23, 
+which is similar to std::set but with a more efficient insertion and deletion operation.
+
+<<--------Basics------->>
+
+
+
+<<--------Operations------->>
+
+Insert: Inserts a new element into the set.
+Erase: Removes an element from the set.
+Find: Searches for an element in the set.
+Lower Bound: Finds the first element that is not less than a given value.
+Upper Bound: Finds the first element that is greater than a given value.
+
+
+Insertion (s.insert(5))
+Finding an element (s.find(2))
+Lower bound (s.lower_bound(3))
+Upper bound (s.upper_bound(3))
+Erasing an element (s.erase(2))
+
+<<--------Operations------->>
+
+
+<<--------Notes------->>
+
+lower_bound(4) returns an iterator pointing to the first element that is not less than 4, which is 4 itself. 
+upper_bound(4) returns an iterator pointing to the first element that is greater than 4, which is 5
+
+<<--------Notes------->>
+
+
