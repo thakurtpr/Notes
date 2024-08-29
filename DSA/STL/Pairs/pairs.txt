@@ -1,0 +1,29 @@
+
+Here are all the operations for STL pairs:
+
+<---------Operations--------->
+
+Constructors
+pair(): Default constructor, creates a pair with default-constructed elements.
+pair(const T1& first, const T2& second): Constructor, creates a pair with the given elements.
+pair(const pair& p): Copy constructor, creates a copy of the given pair.
+pair(pair&& p): Move constructor, creates a pair by moving the elements from the given pair.
+Assignment Operators
+pair& operator=(const pair& p): Copy assignment operator, assigns the elements of the given pair to this pair.
+pair& operator=(pair&& p): Move assignment operator, assigns the elements of the given pair to this pair by moving them.
+Comparison Operators
+bool operator==(const pair& p) const: Equality operator, checks if the elements of this pair are equal to the elements of the given pair.
+bool operator!=(const pair& p) const: Inequality operator, checks if the elements of this pair are not equal to the elements of the given pair.
+bool operator<(const pair& p) const: Less-than operator, checks if the elements of this pair are less than the elements of the given pair.
+bool operator>(const pair& p) const: Greater-than operator, checks if the elements of this pair are greater than the elements of the given pair.
+bool operator<=(const pair& p) const: Less-than-or-equal operator, checks if the elements of this pair are less than or equal to the elements of the given pair.
+bool operator>=(const pair& p) const: Greater-than-or-equal operator, checks if the elements of this pair are greater than or equal to the elements of the given pair.
+Accessing Elements
+T1& first: Accesses the first element of the pair.
+T2& second: Accesses the second element of the pair.
+const T1& first const: Accesses the first element of the pair (const version).
+const T2& second const: Accesses the second element of the pair (const version).
+Swap
+void swap(pair& p): Swaps the elements of this pair with the elements of the given pair.
+
+<---------Operations--------->
