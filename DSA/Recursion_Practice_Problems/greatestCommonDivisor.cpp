@@ -8,3 +8,21 @@
 // Do not use loops (for, while, etc.).
 // Assume a and b are non-negative integers.
 // Please provide your answer in the form of a code snippet (in any programming language).
+
+#include<bits/stdc++.h>
+using namespace std;
+
+int gcd(int a, int b){
+    if (a%b==0){
+        return b;
+    }
+    return gcd(a,a%b);
+}
+int main(){    
+    cout<<"Enter the No's"<<endl;
+    int a ,b;
+    cin>>a>>b;
+    cout<<"greatest Common Divisor is :="<<gcd(a,b)<<endl;
+
+    return 0;
+}
