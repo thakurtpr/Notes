@@ -1,0 +1,40 @@
+<------Basics----->
+
+A vector in C++ is a dynamic array that can grow or shrink in size as elements are added or removed. 
+It is a contiguous container, meaning all elements are stored in contiguous memory locations.
+
+<------Basics----->
+
+
+<------Operations----->
+
+Push_back : Adds an element to the end of the vector.
+Push_front : Not directly supported, but can be achieved using insert() function.
+Pop_back : Removes the last element from the vector.
+Pop_front : Not directly supported, but can be achieved using erase() function.
+Insert : Inserts one or more elements at a specified position.
+Erase : Removes one or more elements from a specified position.
+Clear : Removes all elements from the vector.
+Size : Returns the number of elements in the vector.
+Capacity : Returns the maximum number of elements the vector can hold.
+Resize : Changes the size of the vector.
+Empty : Checks if the vector is empty.
+Front : Returns a reference to the first element.
+Back : Returns a reference to the last element.
+At : Returns a reference to the element at a specified position.
+Operator[] : Accesses the element at a specified position.
+
+push_back(): Adds an element to the end of the vector.
+insert(): Inserts an element at a specified position.
+erase(): Removes one or more elements from a specified position.
+pop_back(): Removes the last element from the vector.
+clear(): Removes all elements from the vector.
+empty(): Checks if the vector is empty.
+
+
+<------Operations----->
+
+
+
+
+

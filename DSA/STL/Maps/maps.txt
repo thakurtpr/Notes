@@ -1,0 +1,32 @@
+<---------Basics--------->
+
+A map in C++ is a container that stores elements in a key-value pair. 
+It's an associative container, meaning each element is associated with a unique key.
+
+<---------Basics--------->
+
+
+<---------Operations--------->
+
+Insert : Inserts a new key-value pair into the map.
+Erase : Removes a key-value pair from the map.
+Find : Finds a key-value pair in the map.
+Size : Returns the number of key-value pairs in the map.
+Empty : Checks if the map is empty.
+Clear : Removes all key-value pairs from the map.
+Operator[] : Accesses the value associated with a key.
+At : Accesses the value associated with a key.
+Count : Returns the number of key-value pairs with a given key.
+Lower Bound : Returns an iterator to the first key-value pair with a key greater than or equal to a given key.
+Upper Bound : Returns an iterator to the first key-value pair with a key greater than a given key.
+
+
+insert(): Inserts a new key-value pair into the map.
+find(): Finds a key-value pair in the map.
+erase(): Removes a key-value pair from the map.
+empty(): Checks if the map is empty.
+clear(): Removes all key-value pairs from the map.
+
+<---------Operations--------->
+
+

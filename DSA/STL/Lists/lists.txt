@@ -8,6 +8,30 @@ It is a doubly-linked list, meaning each element points to both the previous and
 
 
 
+<---------Common Operations--------->
+
+Insert: Inserts a new element at a specified position in the list.
+Erase: Removes an element at a specified position in the list.
+Push_back: Adds a new element to the end of the list.
+Push_front: Adds a new element to the beginning of the list.
+Pop_back: Removes the last element from the list.
+Pop_front: Removes the first element from the list.
+Sort: Sorts the elements in the list.
+Reverse: Reverses the order of elements in the list.
+
+insert(): Inserts an element at a specific position in the list.
+push_back(): Adds an element to the end of the list.
+push_front(): Adds an element to the beginning of the list.
+pop_back(): Removes the last element from the list.
+pop_front(): Removes the first element from the list.
+remove(): Removes all occurrences of an element from the list.
+sort(): Sorts the elements in the list.
+reverse(): Reverses the order of elements in the list.
+
+<---------Common Operations--------->
+
+
+
 
 
 
