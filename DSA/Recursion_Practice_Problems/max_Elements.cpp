@@ -17,26 +17,27 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-int maxArray(int arr[], int size){
-    if(size == 1 ){
-        return arr[size-1];
+int findMax(int arr[],int n)
+{
+//    int max = arr[n];
+    if(n==0){
+        return arr[0];
     }
-
-    int max = arr[size-1];
-    if ( maxArray(arr,size-1)  > max){
-        return max=arr[size-1];
-    }
-  
+    int maximum= findMax(arr,n-1);
+    if (arr[n]>maximum)
+        return arr[n];
+    return maximum;
 }
 int main(){    
-    cout<<"Enter the size of the array "<<endl;
-    int size ; 
-    cin>> size;
-    int arr[size]; 
-    cout<<"Enter the elements for the array "<<endl;
-    for( int i = 0 ;i < size ; i ++ ){
+
+    int size;
+    cout<<"Enter the size of the array"<<endl;
+    cin>>size;
+    int arr[size];
+    cout<<"Enter the elements of the array "<<endl;
+    for(int i = 0 ;i< size;i++){
         cin>>arr[i];
     }
-    cout<<"Maimum elements in the array is : "<<maxArray(arr,size)<<endl;
-    return 0 ;
+    cout<<"Maximum element is := "<<findMax(arr,size-1)<<endl;
+    return 0;
 }

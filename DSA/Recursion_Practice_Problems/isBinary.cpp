@@ -17,19 +17,27 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-bool isBinary(int digit){
-    
+bool isBinary(string input,int index){
+    if (index == 0 ){
+        return true;
+    }
+    else if (input[index]!='0' && input[index]!='1' ){
+        return false ;
+    }
+    return isBinary(input,index-1);
 }
 int main(){    
-    cout<<"Enter the no"<<endl;
-    int n ; 
+    cout<<"Enter the string "<<endl;
+    string n ; 
     cin>>n;
-    if (isBinary(n))
+    int length = n.length()-1;
+    cout<<"length"<<length<<endl;
+    if (isBinary(n,length))
     {
-        cout<<"its a binary no"<<endl;
+        cout<<"its a binary"<<endl;
     }    
     else{
-        cout<<"it contains no as well"<<endl;
+        cout<<"it not a binary"<<endl;
     }
     return 0;
 }
