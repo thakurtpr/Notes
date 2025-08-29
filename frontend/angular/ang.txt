@@ -1,0 +1,422 @@
+"Entries with index.html in the src folder "
+
+
+
+In an Angular application, the entry point after `index.html` is typically the `main.ts` file, 
+not directly another HTML file. Here's a brief explanation of the typical flow:
+
+1. The `index.html` file is the main HTML file that gets served when the application starts.
+
+2. Within `index.html`, there's usually a script tag that loads the Angular application.
+
+3. This script tag points to `main.ts` (or `main.js` after compilation), which is the actual entry point for the Angular application code.
+
+4. The `main.ts` file bootstraps the Angular application by importing necessary modules and calling `platformBrowserDynamic().bootstrapModule(AppModule)`.
+
+5. `AppModule` (defined in `app.module.ts`) is the root module of the application, which declares the root component (usually `AppComponent`).
+
+6. `AppComponent` (defined in `app.component.ts`) is then loaded into the designated element in `index.html` (often `<app-root></app-root>`).
+
+So the flow goes: `index.html` -> `main.ts` -> `app.module.ts` -> `app.component.ts`, and then the application starts rendering from the root component.
+
+
+index.html -> main.ts -> app.module.ts -> app.component.ts
+
+
+
+angular-app/
+├── app/
+│   ├── app.component.css
+│   ├── app.component.html
+│   ├── app.component.ts
+│   ├── app.module.ts
+│   └── main.ts
+├── components/
+│   ├── header/
+│   │   ├── header.component.css
+│   │   ├── header.component.html
+│   │   └── header.component.ts
+│   └── footer/
+│       ├── footer.component.css
+│       ├── footer.component.html
+│       └── footer.component.ts
+├── services/
+│   ├── data.service.ts
+│   └── logger.service.ts
+├── models/
+│   └── user.ts
+├── pipes/
+│   └── date.pipe.ts
+├── directives/
+│   └── highlight.directive.ts
+├── guards/
+│   └── auth.guard.ts
+├── routing/
+│   └── app.routing.module.ts
+└── index.html
+
+
+@NgModule decorator
+
+
+
+Let's break down each property in the @NgModule decorator:
+1. declarations:
+    declarations is an array of components, directives, and pipes that belong to this module.
+    Components: AppComponent, HeaderComponent, and FooterComponent are declared here.
+    Purpose: Declaring components here makes them available for use within the module.
+    Rules:
+    A component can only be declared in one module.
+    Components must be declared in a module to be used in the application.
+2. imports:
+    imports is an array of other modules whose exported components, directives, and pipes are referenced in this module.
+    Modules: BrowserModule and AppRoutingModule are imported here.
+    Purpose: Importing modules provides access to their exported components, directives, and pipes.
+
+    Common imported modules:
+    BrowserModule (browser-based functionality)
+    FormsModule (form-related functionality)
+    HttpClientModule (HTTP client functionality)
+    Feature modules (custom modules for specific features)
+
+3. providers:
+    providers is an array of services that are available to all components within this module.
+    Services: None are provided in this example ([]).
+    Purpose: Providing services makes them available for injection into components.
+    
+    Service types:
+    Singleton services (shared across the application)
+    Component-specific services
+
+4. bootstrap:
+    bootstrap specifies the component that should be used as the application's root component.
+    Component: AppComponent is bootstrapped here.
+    Purpose: Bootstrapping a component makes it the entry point for the application.
+    Rules:
+    Only one component can be bootstrapped per module.
+    The bootstrapped component is the root of the application's component tree.
+    Additional concepts:
+    Module hierarchy: Modules can be nested, allowing for a hierarchical organization of your application.
+    Module exports: Modules can export components, directives, and pipes, making them available for import in other modules.
+    Lazy loading: Modules can be loaded lazily, reducing the initial application payload.
+Example of a more complex module configuration:
+TypeScript
+// app.module.ts
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { AppComponent } from './app.component';
+import { HeaderComponent } from './header/header.component';
+import { FooterComponent } from './footer/footer.component';
+import { AppRoutingModule } from './app-routing.module';
+import { HttpClientModule } from '@angular/common/http';
+import { UserService } from './user.service';
+
+@NgModule({
+  declarations: [
+    AppComponent,
+    HeaderComponent,
+    FooterComponent
+  ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule
+  ],
+  providers: [
+    UserService
+  ],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
+
+
+
+
+
+Bootstraping a component:
+
+    When a component is bootstrapped, Angular:
+        Creates an instance of the component
+        Renders the component's template
+        Attaches the component to the DOM (Document Object Model)
+        Initializes the component's lifecycle hooks
+
+
+
+
+instance ->> render ->> attach to the DOM -- index.html ->> 
+
+
+
+
+AppComponent is bootstrapped.
+    HeaderComponent and FooterComponent are created and rendered as children of AppComponent.
+    Angular manages the component tree, handling rendering, event handling, and lifecycle hooks.
+
+
+😊1. Rendering:
+    Angular's rendering process involves:
+        Template Compilation: Angular compiles the component's template (HTML) into a JavaScript function.
+
+        Change Detection: Angular checks for changes in the component's data bindings and updates the DOM accordingly.
+
+        DOM Manipulation: Angular updates the DOM by adding, removing, or modifying elements.
+
+
+⭐⭐[ data - bindings ]⭐⭐
+
+
+    ✍️  1. Interpolation (One-way binding)
+
+            Syntax: {{ expression }}
+
+            Example:
+              Component:
+                    export class AppComponent {
+                        title = 'Angular Data Binding';
+                    }
+
+              Template:
+                    <h1>{{ title }}</h1>
+                    Result: <h1>Angular Data Binding</h1>
+
+    
+    ✍️  2. Property Binding (One-way binding)
+
+            Syntax: [property]="expression"
+
+            Example:
+                Component:
+                export class AppComponent {
+                    imageUrl = 'assets/angular-logo.png';
+                }
+
+                Template:
+                <img [src]="imageUrl">
+                Result: <img src="assets/angular-logo.png">
+
+    
+    ✍️  3. Event Binding (One-way binding)
+
+            Syntax: (event)="expression"
+
+            Example:
+                Component:
+                    export class AppComponent {
+                    onClick() {
+                        console.log('Button clicked!');
+                        }
+                    }
+
+                Template:
+                    <button (click)="onClick()">Click me</button>
+
+                Result: Logs "Button clicked!" to the console when the button is clicked.
+
+
+    ✍️  4. Two-way Binding
+
+            Syntax: [(ngModel)]="property"
+
+            Example:
+                Component:
+                    export class AppComponent {
+                        name = 'John Doe';
+                    }
+                    
+                Template:
+                    <input type="text" [(ngModel)]="name">
+
+                Result: Binds the input field to the name property, updating both the input field and the component property when changed.
+
+    ✍️  5. Attribute Binding
+
+            Syntax: [attr.attributeName]="expression"
+
+            Example:
+                Component:
+                    export class AppComponent {
+                        href = 'https://angular.io';
+                    }
+
+                    Template:
+                       <a [attr.href]="href">Visit Angular.io</a>
+
+                    Result: <a href="https://angular.io">Visit Angular.io</a>
+
+    ✍️  6. Class Binding
+
+            Syntax: [class.className]="expression"
+
+            Example:
+                Component:
+                    export class AppComponent {
+                        isSelected = true;
+                    }
+
+                Template:
+                    <div [class.selected]="isSelected">Selected item</div>
+
+                Result: <div class="selected">Selected item</div>
+
+    ✍️  7. Style Binding
+
+            Syntax: [style.styleProperty]="expression"
+
+
+            Example:
+                Component:
+                    export class AppComponent {
+                        fontSize = '24px';
+                    }
+
+                Template:
+                    <p [style.font-size]="fontSize">This text is 24px</p>
+
+                Result: <p style="font-size: 24px">This text is 24px</p>
+
+    ✍️  8. Event Emitter Binding
+
+            Syntax: (event)="expression"
+
+
+
+            Example:
+                Component (child):
+                    import { Component, EventEmitter, Output } from '@angular/core';
+
+                    @Component({
+                    selector: 'child-component',
+                    template: `
+                        <button (click)="onClick()">Click me</button>
+                    `
+                    })
+                    export class ChildComponent {
+                    @Output() onClick = new EventEmitter();
+
+                    onClick() {
+                        this.onClick.emit();
+                    }
+                    }
+
+
+
+                Component (parent):
+
+                    import { Component } from '@angular/core';
+
+                    @Component({
+                    selector: 'app-root',
+                    template: `
+                        <child-component (onClick)="onChildClick()"></child-component>
+                    `
+                    })
+                    export class AppComponent {
+                    onChildClick() {
+                        console.log('Child component clicked!');
+                    }
+                    }
+
+
+⭐⭐Parent - Child Communication⭐⭐
+
+    ✍️  1. Property Binding (Parent-to-Child)
+
+            Property binding allows the parent component to pass data to the child component.
+
+        Parent Component::
+            import { Component } from '@angular/core';
+
+            @Component({
+            selector: 'app-parent',
+            template: `
+                <app-child [childProperty]="parentProperty"></app-child>
+            `
+            })
+            export class ParentComponent {
+                parentProperty = 'Hello, Child!';
+            }
+
+
+        Child Component::
+            import { Component, Input } from '@angular/core';
+
+            @Component({
+            selector: 'app-child',
+            template: `
+                <p>Received from Parent: {{ childProperty }}</p>
+            `
+            })
+            export class ChildComponent {
+                @Input() childProperty: string = '';
+            }
+
+
+    ✍️  2. Event Emission (Child-to-Parent)
+
+            Event emission allows the child component to notify the parent component of events.
+
+            Child Component:
+                import { Component, Output, EventEmitter } from '@angular/core';
+                @Component({
+                selector: 'app-child',
+                template: `
+                    <button (click)="onClick()">Notify Parent</button>
+                `
+                })
+                export class ChildComponent {
+                @Output() notifyParent = new EventEmitter<string>();
+
+                onClick() {
+                    this.notifyParent.emit('Hello, Parent!');
+                 }
+                }
+
+            Parent Component:
+                import { Component } from '@angular/core';
+                @Component({
+                selector: 'app-parent',
+                template: `
+                    <app-child (notifyParent)="onNotify($event)"></app-child>
+                `
+                })
+                export class ParentComponent {
+                onNotify(message: string) {
+                    console.log(message); // Logs "Hello, Parent!"
+                  }
+                }
+
+        How it works:
+            The child component defines an Output property (notifyParent) and an EventEmitter.
+            The child component emits an event using the emit method.
+            The parent component listens to the event using the (notifyParent) syntax.
+            The parent component receives the event data in the onNotify method.
+
+
+
+    ✍️  3. Two-way Binding (Parent-Child)
+
+            Two-way binding allows data to flow in both directions between the parent and child components.
+
+        Parent Component:
+
+            import { Component } from '@angular/core';
+            @Component({
+            selector: 'app-parent',
+            template: `
+                <app-child [(childProperty)]="parentProperty"></app-child>
+            `
+            })
+            export class ParentComponent {
+                parentProperty = 'Initial value';
+            }
+
+
+
+
+
+
+
+
+
+

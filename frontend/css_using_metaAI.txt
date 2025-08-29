@@ -1,0 +1,60 @@
+-------------------------
+Concept: Flex Basis
+-------------------------
+What is Flex Basis?
+    Initial main size of an element in a flex container
+    Sets initial width or height before flexibility is applied
+Common Values
+    auto: Default, calculates initial size based on content
+    0: Sets initial size to 0, making element flexible
+    100px, 20%, etc.: Sets fixed initial size
+How it Works
+    Sets initial size of element
+    Flex container adjusts size based on available space, flex-grow, and flex-shrink
+Example
+    .item { flex-basis: 200px; flex-grow: 1; }
+    
+    **Initial width: 200px
+    
+    **Flexible width: grows to fill available space
+
+Key Points
+    Not the same as width or height
+    Flexbox-specific property
+    Influences initial size of element in flex container
+
+-------------------------
+Concept: Flex Shrink
+-------------------------
+
+flex-shrink controls how much a flex item can shrink relative to its initial width (set by flex-basis ).
+Value: a number (e.g., 1, 0.5, 2).
+Default value: 1.
+
+
+-------------------------
+Concept: Flex Grow
+-------------------------
+
+
+
+
+
+
+
+
+
+
+-------------------------
+Concept: Flex (All in one)
+-------------------------
+
+
+
+.flex-container {
+  display: flex;
+}
+
+.item {
+  flex: 1 1 100px; /* Add this line */
+}

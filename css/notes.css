@@ -1,0 +1,78 @@
+/* {
+
+padding: top/bottom left/rigt
+
+
+
+
+
+
+
+position:fixed    := it is fixed fully 
+position:absolute := goes up i.e up above the screen EX: Tesla Car 
+position:sticky   := will move but upto a defined position if not defined it will scrolled up 
+
+
+position:relative  
+position:absolute 
+
+defining a position absolute inside a parent element will make the element move out of 
+the parent element 
+To prevent it i.e moving the 
+
+
+
+image tag is not closed 
+
+i.e image tag is an open tag  ::   it doesnt have close tag 
+
+
+
+using z index to control 
+
+
+------------------
+flex-box:flex-wrap
+------------------
+
+
+
+
+display :flex
+
+flex-wrap:wrap 
+
+justify content: space-between 
+
+object-fit:cover
+
+
+
+
+--------------------
+Animations
+--------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+} */
+
+
+
+/* .bg{
+    width: 670px;
+
+} */

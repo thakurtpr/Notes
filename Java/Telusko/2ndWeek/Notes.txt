@@ -1,0 +1,82 @@
+[INTERFACE]
+===========================================================================================================================
+
+-- An interface is a contract that defines methods without implementations.
+
+-- It is used to achieve abstraction and multiple inheritance.
+
+-- All methods in an interface are public and abstract by default.
+
+-- Interfaces can have:
+     abstract methods (no body)
+     default methods (with body using default keyword)
+     static methods
+     constants (public static final)
+
+
+
+
++--------------------+         implements        +----------------------------+
+|   Interface        |  --------------------->   |   Implementing Class       |
+|--------------------|                          |----------------------------|
+| + method1();       |                          | + method1() {              |
+| + method2();       |                          |     // method body         |
+|                    |                          |   }                        |
++--------------------+                          +----------------------------+
+
+
++---------------------------+
+| Interface: Animal         |
+|---------------------------|
+| + void makeSound();       |
+| + void eat();             |
++---------------------------+
+
+           implements
+               ↓
+
++---------------------------+
+| Class: Dog                |
+|---------------------------|
+| + void makeSound() {      |
+|     System.out.println(   |
+|         "Woof!");         |
+|   }                       |
+| + void eat() {            |
+|     System.out.println(   |
+|         "Dog eats bone"); |
+|   }                       |
++---------------------------+
+
+
+===========================================================================================================================
+
+
+
+[ENUM]
+===========================================================================================================================
+               +-------------------------------+
+               |           enum                |
+               +-------------------------------+
+               |  A special class that          |
+               |  defines a fixed set of        |
+               |  constant, type-safe values    |
+               +-------------------------------+
+
+✔ Syntax:
+    enum TrafficLight {
+        RED, YELLOW, GREEN
+    }
+
+✔ Usage:
+    TrafficLight light = TrafficLight.RED;
+
+✔ Why Use:
+    ✅ Prevents invalid values
+    ✅ Improves code clarity
+    ✅ Works with switch-case
+    ✅ Can have constructors & methods
+===========================================================================================================================
+
+
+ 

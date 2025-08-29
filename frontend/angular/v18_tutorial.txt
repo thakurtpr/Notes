@@ -1,0 +1,39 @@
+DataBinding()=>
+
+        InterPolation {{}}
+        Property Binding []
+        Two Way Data Binding using [(ngModel)]
+        Event Binding 
+
+
+Directives () => 
+
+        Structural , attribute 
+
+        structural -> ngIf ngFor
+
+        attribute -> ngClass ngStyle
+
+
+
+ngIf,ngFor || ngClass , ngStyle
+Control flow Statement => @if , @for , @switch
+
+
+Routing -> routes , routeroutlet ,routerLink , routerLinkActive
+
+
+Signal : ==
+How to use signal :=
+        firstName = signal("Angular 18")
+
+by using set method we can change the 
+signal 
+         this.firstName.set("ReactJs")
+
+
+
+
+
+
+

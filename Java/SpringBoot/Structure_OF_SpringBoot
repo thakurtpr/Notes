@@ -1,0 +1,109 @@
+CoOrdinates of Dependcy
+
+GroupID
+ArtifactID
+Version
+
+
+We can Download any jar from maven repository
+
+
+
+
+
+if in any package pom.xml is there then the build tool is maven 
+================
+mvn package
+================
+-- validate
+-- compile
+-- test 
+-- build a jar 
+================
+
+
+================
+.idea folder 
+================
+    contains files related to intelliJ 
+================
+
+
+
+[.mvn folder] 
+================================================================
+if we use maven wrapper it will use the maven jar
+================================================================
+
+
+
+[.gitIgnore]
+================================================================================================================
+those things are written which are need not to be commited 
+================================================================================================================
+
+
+[src]
+================================================================================================================
+--main
+----java {source code}
+----resources
+        {properites are present here , configuration of databases}
+
+--test
+    {method written in main to test}
+
+
+[pom.xml]
+================================================================================================================
+pom : project object model
+external libraries that will be used in our project
+
+--------
+plugins 
+--------
+when we run the project plugins get used 
+help packaging code into jar and war 
+
+---------
+parent
+---------
+parents those are mentioned here will get inherited into our project
+
+
+-----------
+properties
+-----------
+override the version mentioned here
+maven compiler plugin is told that the required version will get used here
+
+compile--> byte(code)-->it should be compatible with the mentioned version in he properties section of the pom.xml
+
+================================================================================================================
+
+
+
+[target]
+================================================================================================================
+.jar
+.original
+
+.jar is known as fat 
+as it contains the below things hence bigger in size than the original hence called as fat.
+
+.jar 
+conains all the plugins and dependencies used in the project 
+contians own embedded tomcat server 
+Hence external tomcat not required
+
+
+whereas 
+.original only contains the compiled code
+
+
+repackage
+plugins repackage the code into a fat jar when we run mvn package 
+
+================================================================================================================
+
+

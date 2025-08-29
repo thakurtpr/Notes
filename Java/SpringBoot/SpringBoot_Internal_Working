@@ -1,0 +1,123 @@
+WE WILL LEARN ALL THE INTERNAL WORKINGS OF SPRING BOOT HERE 
+
+---------------------------------------------------------------
+Previously we are making object using our own Syntax : 
+Car car = new Car();
+
+
+[ But now we will be able to get the object from the Spring ]
+
+This is known as Inversion of Control.
+---------------------------------------------------------------
+
+
+
+
+[INVERSION OF CONTROL]()
+================================================================================================================
+[]User -- > IOC Container (Spring) -- > gives the object back to the User[]
+
+IOC CONTAINER -- ALL THE OBJECTS ARE CONTAINED HERE 
+
+Whenever we need any object we get it from IOC CONTAINER
+
+
+-------------------------------------------------------
+Application Context is the way to achieve IOC CONTAINER
+-------------------------------------------------------
+
+
+
+
+
+-------------------------------------------------------
+How it contains these many objects?
+-------------------------------------------------------
+IOC Container do a scans to get the object 
+whenever it finds any @ component it stores that object ;
+
+
+-----------
+ANNOTATIONS
+-----------
+We can write anotations in following entities
+--class
+--interface
+--method
+--field
+
+what do annotations provide?
+it provides the information of the specific entity
+
+ 
+
+@Component --- class is automatically registered as a spring bean.
+
+Bean -- {Is an object} i.e any object contained inside the IOC CONTAINER is known as bean.
+
+without intializing these beans we can use those beans as an object.
+
+
+================================================================================================================
+
+
+[ANNOTATIONS]
+================================================================================================================
+We can write annotations in following entities
+--class
+--interface
+--method
+--field
+
+
+@Component --- class is automatically registered as a spring bean
+
+Bean -- {Is an object} i.e any object contained inside the IOC CONTAINER is known as bean
+
+without intializing these beans we can use those beans as an object
+
+
+
+@SpringBootApplication -- it performs three works i.e
+---@Configuration
+---@EnableAutoConfiguration
+---@ComponentScan
+
+@ComponentScan
+---------Scans for @Component
+-----------Those are inside the com.edigest.myFirstProject (base Package)
+
+
+
+
+
+Scan beans for @Component annotation
+
+
+
+@EnableAutoConfiguration
+Auto Configuration is done for the database connectivity
+
+
+
+
+@Configuration
+If written in class , the class would provide some configuration 
+
+
+it is used with another annotatation i.e @Bean
+
+@Bean annotation is used in function not in class
+
+
+================================================================================================================
+
+
+
+
+
+
+[]
+================================================================================================================
+
+================================================================================================================

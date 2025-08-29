@@ -7,7 +7,7 @@ int main() {
   for (int i = 1; i <= 10; i++) {
     s.insert(i);
   }
-
+  s.insert(2);
   cout << "Elements present in the unordered set: ";
   for (auto it = s.begin(); it != s.end(); it++) {
     cout << * it << " ";

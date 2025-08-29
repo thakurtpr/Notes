@@ -1,0 +1,104 @@
+-------------------------
+1. CSS Basics
+-------------------------
+
+    Selectors: Target HTML elements (e.g., h1, .class, #id)
+    Properties: Define styles (e.g., color, font-size, background-color)
+    Values: Assign values to properties (e.g., red, 16px, #fff)
+
+
+-------------------------
+2. CSS Selectors
+-------------------------
+
+    Type Selectors: Target elements by type (e.g., h1, p, img)
+    Class Selectors: Target elements by class (e.g., .header, .footer)
+    ID Selectors: Target elements by ID (e.g., #logo, #nav)
+    Attribute Selectors: Target elements by attribute (e.g., [hreflang="en"])
+
+
+-------------------------
+3. CSS Properties
+-------------------------
+
+    Color Properties: color, background-color, border-color
+    Text Properties: font-size, font-family, text-align
+    Layout Properties: width, height, margin, padding
+
+
+-------------------------
+4. CSS Box Model
+-------------------------
+
+    The Box Model Consists of:
+        Content Area: The area where the element's content is displayed
+        Padding: The space between the content area and the border
+        Border: The visible border around the element
+        Margin: The space between the element and other elements
+
+    Box Model Properties:
+        width and height: Set the content area's dimensions
+        padding: Set the padding size (e.g., padding: 20px;)
+        border: Set the border style, width, and color (e.g., border: 1px solid black;)
+        margin: Set the margin size (e.g., margin: 20px;)
+
+Example:
+    div {
+        width: 300px;
+        height: 200px;
+        padding: 20px;
+        border: 1px solid black;
+        margin: 20px;
+    }
+
+
+
+-------------------------
+5. CSS Positioning
+-------------------------
+
+CSS positioning allows you to control the layout of elements on a web page.
+
+Positioning Schemes:
+    Static: Default positioning scheme (elements are positioned in the normal document flow)
+    Relative: Element is positioned relative to its normal position
+    Absolute: Element is positioned relative to its nearest positioned ancestor
+    Fixed: Element is positioned relative to the viewport (browser window)
+    Sticky: Element is positioned relative to its nearest positioned ancestor, but sticks to the viewport when scrolled
+Positioning Properties:
+    position: Sets the positioning scheme (e.g., position: relative;)
+    top, right, bottom, left: Set the position of the element (e.g., top: 20px;)
+    z-index: Sets the stacking order of elements (e.g., z-index: 1;)
+
+
+-------------------------
+6. CSS Flexbox
+-------------------------
+
+CSS Flexbox allows you to create flexible and responsive layouts.
+
+Flex Container Properties:
+    display: Sets the container to a flex container (e.g., display: flex;)
+    flex-direction: Sets the direction of the flex items (e.g., flex-direction: row;)
+    justify-content: Sets the justification of the flex items (e.g., justify-content: center;)
+    align-items: Sets the alignment of the flex items (e.g., align-items: center;)
+Flex Item Properties:
+    flex-grow: Sets the growth factor of the flex item (e.g., flex-grow: 1;)
+    flex-shrink: Sets the shrink factor of the flex item (e.g., flex-shrink: 1;)
+    flex-basis: Sets the initial width of the flex item (e.g., flex-basis: 200px;)
+
+
+-------------------------
+7. CSS Grid
+-------------------------
+
+CSS Grid allows you to create two-dimensional grids for layout.
+
+Grid Container Properties:
+    display: Sets the container to a grid container (e.g., display: grid;)
+    grid-template-columns: Defines the number and width of grid columns (e.g., grid-template-columns: 200px 300px;)
+    grid-template-rows: Defines the number and height of grid rows (e.g., grid-template-rows: 100px 200px;)
+    grid-gap: Sets the gap between grid cells (e.g., grid-gap: 10px;)
+Grid Item Properties:
+    grid-column: Specifies the grid column(s) an item should span (e.g., grid-column: 1 / 3;)
+    grid-row: Specifies the grid row(s) an item should span (e.g., grid-row: 1 / 3;)

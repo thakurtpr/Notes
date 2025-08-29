@@ -1,0 +1,22 @@
+creating table in sql
+
+CREATE TABLE customers (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(50),
+    email VARCHAR(100)
+);
+
+get all the data from a table :==  select * from customers
+
+inserting into a table :=  insert into customers (id,name) VALUES (1,'THAKUR');
+
+-------------------------------------------
+we cannot use insert to update a row in sql
+-------------------------------------------
+
+UPDATE customers
+SET email = 'thakurtpr@gmail.com'
+WHERE id=1;
+
+update a row using the above command 
+

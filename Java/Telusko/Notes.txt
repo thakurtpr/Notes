@@ -1,0 +1,1545 @@
+[How java works]
+===========================================================================================================================
+
+java - > compile - > bytecode -> search for jvm -> run the byte code in jvm 
+
+we should write everything in main() i.e == 
+public static void main()
+
+java == oops == everything is object hence we need class everytime 
+
+**
+extension for bytecode ==== .class
+**
+
+what if you need some libraries it would not be present inside jvm hence we need libraries which is contained in jre 
+jre == java run time environment 
+
+**********************
+[jdk [jre [ jvm ] ] ]
+**********************
+
+if we want to run the java code in another machine then we need jre and jvm in that machine 
+┌────────────────────────────────────────────┐
+│            JVM Memory (Runtime Area)       │
+│                                            │
+│  ┌─────────────┐  ┌─────────────────────┐  │
+│  │  Method Area│  │     Heap            │  │
+│  │  (String    │  │  (Objects +         │  │
+│  │   Pool +    │  │   instance data)    │  │
+│  │   class info)│ └─────────────────────┘  │
+│  └─────────────┘                           │
+│  ┌─────────────┐  ┌─────────────────────┐  │
+│  │ Stack Area  │  │ Program Counter (PC)│  │
+│  └─────────────┘  └─────────────────────┘  │
+└────────────────────────────────────────────┘
+
+┌─────────────────────────────┐
+│          JVM Memory          │
+│                             │
+│ ┌─────────────┐ ┌─────────┐ │
+│ │  Method     │ │  Heap   │ │
+│ │  Area       │ │ Objects │ │
+│ │             │ │         │ │
+│ │ ┌─────────┐ │ │         │ │
+│ │ │String   │ │ │         │ │
+│ │ │Pool     │ │ │         │ │
+│ │ └─────────┘ │ │         │ │
+│ └─────────────┘ └─────────┘ │
+│ ┌─────────────┐ ┌─────────┐ │
+│ │  Stack      │ │ Native  │ │
+│ │ (Local vars)│ │ Memory  │ │
+│ └─────────────┘ └─────────┘ │
+└─────────────────────────────┘
+
+---------------------------
+Method Area layout Diagram
+---------------------------
+
+┌─────────────────────────────────────────────┐
+│                Method Area                   │
+│  (shared among all class instances)          │
+├─────────────────────────────────────────────┤
+│  Class Metadata:                             │
+│  ┌──────────────────────────────────────┐  │
+│  │ Class Name, Superclass, Interfaces   │  │
+│  │ Field Descriptions                   │  │
+│  │ Method Descriptions (signatures)    │  │
+│  └──────────────────────────────────────┘  │
+│                                             │
+│  Static Variables:                           │
+│  ┌──────────────────────────────────────┐  │
+│  │ static int count                      │  │
+│  │ static String myStr                   │  │
+│  │ ...                                  │  │
+│  └──────────────────────────────────────┘  │
+│                                             │
+│  Runtime Constant Pool:                      │
+│  ┌──────────────────────────────────────┐  │
+│  │ Numeric literals, method refs, etc.  │  │
+│  └──────────────────────────────────────┘  │
+│                                             │
+│  String Pool (String Constant Pool):        │
+│  ┌──────────────────────────────────────┐  │
+│  │ "hello"                              │◄─┐│
+│  │ "world"                              │  ││ referenced by static & instance Strings
+│  │ "thakur"                             │  ││
+│  │ ...                                  │  │
+│  └──────────────────────────────────────┘  │
+│                                             │
+│  Method Bytecode & JVM Internals:           │
+│  ┌──────────────────────────────────────┐  │
+│  │ Method instructions, JVM internal data│ │
+│  └──────────────────────────────────────┘  │
+└─────────────────────────────────────────────┘
+
++------------------------------------------------------+
+|                    JVM Memory                        |
++------------------------------------------------------+
+|                                                      |
+|  +------------------+                                |
+|  |    Method Area    |  <-- Stores class and          |
+|  |  (aka MetaSpace)  |      interface metadata,       |
+|  |------------------|      static variables,          |
+|  | - Class info      |      constant pool              |
+|  | - Interface info  |      (including interface      |
+|  |   - method sigs   |       method signatures)       |
+|  |   - default/static|                                |
+|  |     methods body  |                                |
+|  +------------------+                                |
+|                                                      |
+|  +------------------+                                |
+|  |       Heap       |  <-- Stores all objects and     |
+|  |                  |      instance variables         |
+|  +------------------+                                |
+|                                                      |
+|  +------------------+                                |
+|  |       Stack      |  <-- Stores method call frames, |
+|  |                  |      local variables            |
+|  +------------------+                                |
+|                                                      |
+|  +------------------+                                |
+|  |    PC Registers  |  <-- Tracks current instruction  |
+|  +------------------+                                |
+|                                                      |
+|  +------------------+                                |
+|  | Native Method Stk |  <-- For native code calls      |
+|  +------------------+                                |
++------------------------------------------------------+
+
+
+***
+-----------------------------------------------------------------
+It is a Shared memory i.e All threads share the same method area.
+-----------------------------------------------------------------
+***
+===========================================================================================================================
+
+
+[variables]
+===========================================================================================================================
+int -- 4 
+long -- 8  [ 5854l ]
+short -- 2
+byte -- 1
+float -- 4  [ 5.6f ]
+double -- 8 
+String -- 2
+
+bsf are idol
+124     488
+
+[literals]
+===========================================================================================================================
+int num1 = 0b101;  binary 
+===========================================================================================================================
+
+
+[type conversion / type casting]
+===========================================================================================================================
+byte b = 127 
+int a = 256 
+
+a=b 👍
+b=a not possible
+
+::: now type casting :::
+b = (byte)a ;
+
+float f = 5.6f
+int x = (int)f;
+
+
+| Type     | Also Known As | Syntax Needed | Data Loss? | Example                            |
+| -------- | ------------- | ------------- | ---------- | ---------------------------------- |
+| Implicit | Widening      | No            | No         | `int a = 5; long b = a;`           |
+| Explicit | Narrowing     | Yes           | Possible   | `double d = 5.5; int i = (int) d;` |
+
+
+[relation operators]
+===========================================================================================================================
+
+public class RelationalOperatorsDemo {
+    public static void main(String[] args) {
+        int a = 10, b = 20;
+
+        System.out.println("a == b: " + (a == b));  // false
+        System.out.println("a != b: " + (a != b));  // true
+        System.out.println("a > b: " + (a > b));    // false
+        System.out.println("a < b: " + (a < b));    // true
+        System.out.println("a >= b: " + (a >= b));  // false
+        System.out.println("a <= b: " + (a <= b));  // true
+    }
+}
+***********************************************
+To compare objects, use .equals() instead of ==
+***********************************************
+
+===========================================================================================================================
+
+
+
+
+
+[relational operators]
+===========================================================================================================================
+
+
+| Operator | Name        | Description                                                 | Example             | Result                                     |          |   |           |              |
+| -------- | ----------- | ----------------------------------------------------------- | ------------------- | ------------------------------------------ | -------- | - | --------- | ------------ |
+| `&&`     | Logical AND | True if **both** conditions are true                        | `(a > 5 && b < 10)` | `true/false`                               |          |   |           |              |
+| |`       |             | |`                                                          | Logical OR          | True if **at least one** condition is true | \`(a > 5 |   | b < 10)\` | `true/false` |
+| `!`      | Logical NOT | Reverses the result: `true` becomes `false`, and vice versa | `!(a > 5)`          | `true/false`                               |          |   |           |              |
+
+
+===========================================================================================================================
+
+
+
+
+
+[ternary Operator]
+===========================================================================================================================
+
+
+| Syntax                      | Name             | Description                                          | Example                        | Result       |
+| --------------------------- | ---------------- | ---------------------------------------------------- | ------------------------------ | ------------ |
+| `condition ? expr1 : expr2` | Ternary Operator | Returns `expr1` if condition is `true`, else `expr2` | `(a > b) ? a : b`              | larger value |
+| Example with output         |                  |                                                      | `int max = (10 > 5) ? 10 : 5;` | `max = 10`   |
+
+
+
+public class TernaryExample {
+    public static void main(String[] args) {
+        int a = 10, b = 20;
+        int max = (a > b) ? a : b;
+        System.out.println("Maximum is: " + max);
+    }
+}
+
+===========================================================================================================================
+
+
+
+
+[switch-case]
+===========================================================================================================================
+
+| Component | Description                                         |
+| --------- | --------------------------------------------------- |
+| `switch`  | Tests a variable/expression against multiple values |
+| `case`    | Defines possible values and associated code blocks  |
+| `break`   | Exits the switch block (prevents fall-through)      |
+| `default` | Runs if no `case` matches (optional, like `else`)   |
+
+
+public class SwitchExample {
+    public static void main(String[] args) {
+        int day = 3;
+
+        switch (day) {
+            case 1:
+                System.out.println("Monday");
+                break;
+            case 2:
+                System.out.println("Tuesday");
+                break;
+            case 3:
+                System.out.println("Wednesday");
+                break;
+            default:
+                System.out.println("Invalid day");
+        }
+    }
+}
+
+===========================================================================================================================
+
+
+
+[ METHODS ]
+===========================================================================================================================
+| Component       | Description                                                             |
+| --------------- | ----------------------------------------------------------------------- |
+| **Method**      | A block of code that performs a specific task and can be reused         |
+| **Syntax**      | `returnType methodName(parameters) { // body }`                         |
+| **`void`**      | Used when the method does **not** return a value                        |
+| **Return Type** | Data type of the value the method returns (e.g., `int`, `String`, etc.) |
+| **Parameters**  | Input values passed to the method                                       |
+| **Method Call** | Executing the method using `methodName(arguments)`                      |
+
+
+public class MethodExample {
+
+    // method without return value
+    static void greet() {
+        System.out.println("Hello, welcome!");
+    }
+
+    // method with return value and parameters
+    static int add(int a, int b) {
+        return a + b;
+    }
+
+    public static void main(String[] args) {
+        greet();  // calling method without return
+        int sum = add(5, 3);  // calling method with return
+        System.out.println("Sum: " + sum);
+    }
+}
+
+===========================================================================================================================
+
+
+
+
+[ METHOD OVERLOADING ]
+===========================================================================================================================
+
+Different parameters with different data type 
+
+| Concept                | Description                                                                       |
+| ---------------------- | --------------------------------------------------------------------------------- |
+| **Method Overloading** | Defining **multiple methods** with the **same name** but **different parameters** |
+| **How it differs**     | Varies by **number**, **type**, or **order** of parameters                        |
+| **Return type**        | Can be same or different (but alone can’t distinguish methods)                    |
+| **Purpose**            | Increases code **readability** and **reusability**                                |
+
+public class OverloadExample {
+
+    // Method 1: no parameters
+    static void display() {
+        System.out.println("Display with no parameters");
+    }
+
+    // Method 2: one int parameter
+    static void display(int a) {
+        System.out.println("Display with int: " + a);
+    }
+
+    // Method 3: two parameters (int and String)
+    static void display(int a, String b) {
+        System.out.println("Display with int and String: " + a + ", " + b);
+    }
+
+    public static void main(String[] args) {
+        display();
+        display(10);
+        display(5, "Java");
+    }
+}
+
+OUTPUT ::
+Display with no parameters  
+Display with int: 10  
+Display with int and String: 5, Java  
+
+===========================================================================================================================
+
+
+
+[STACK & HEAP]
+===========================================================================================================================
+-------------------------
+STACK : LAST IN FIRST OUT 
+-------------------------
+Every method will have its own stack 
+
+
+HEAP :
+Will only contain the variables and function definations 
+**** variables which are outside the methods in that class
+
+
+
+
+
+| Feature          | **Stack**                            | **Heap**                                           |
+| ---------------- | ------------------------------------ | -------------------------------------------------- |
+| **Memory Use**   | Stores method calls, local variables | Stores objects, instance/class variables           |
+| **Access**       | LIFO (Last-In-First-Out)             | Random access                                      |
+| **Size**         | Generally smaller                    | Larger                                             |
+| **Allocation**   | Automatically managed                | Needs garbage collection                           |
+| **Lifetime**     | Exists until method finishes         | Exists until no references remain                  |
+| **Thread Scope** | One stack per thread (thread-safe)   | Shared across threads (not thread-safe by default) |
+| **Performance**  | Faster (simple access and cleanup)   | Slower (due to GC and dynamic access)              |
+
+
+
+
+public class MemoryExample {
+    public static void main(String[] args) {
+        int x = 10;              // stored in Stack
+        MyObject obj = new MyObject(); // obj reference in Stack, object in Heap
+        obj.show();
+    }
+}
+
+class MyObject {
+    int num = 100;              // num is in Heap
+    void show() {
+        System.out.println("Number: " + num);
+    }
+}
+
+
+Stack = fast, local data, auto cleanup
+Heap = flexible, shared, garbage-collected
+===========================================================================================================================
+
+
+
+[STRING]
+===========================================================================================================================
+String is not a data type 
+
+************String is actually a class*****************
+
+┌──────────────────────────────┐
+│          Method Area         │
+│  (Contains class metadata &  │
+│   the String Pool)           │
+├──────────────────────────────┤
+│  String Pool:                │
+│  ┌────────────────────────┐  │
+│  │ "hello"                │◄─┐ a, b reference this
+│  └────────────────────────┘  │
+└──────────────────────────────┘
+             ▲
+             │
+┌──────────────────────────────┐
+│            Heap              │
+│  ┌────────────────────────┐  │
+│  │ new String("hello")    │◄─┐ c refers to this (new object)
+│  └────────────────────────┘  │
+│                              │
+│  ┌────────────────────────┐  │
+│  │ Person Object          │◄─┐ p refers to this
+│  │ name ─────────────┐    │  │
+│  │                   ▼    │  │
+│  │              "John"    │◄─┐ String literal from pool
+│  └────────────────────────┘  │
+└──────────────────────────────┘
+             ▲
+             │
+┌──────────────────────────────┐
+│            Stack             │
+│  ┌────────────────────────┐  │
+│  │ main() Frame           │  │
+│  │ ┌─────┬──────────────┐ │  │
+│  │ │ var │ Reference     │ │  │
+│  │ ├─────┼──────────────┤ │  │
+│  │ │ a   │ → "hello"     │───┘
+│  │ │ b   │ → "hello"     │
+│  │ │ c   │ → new String  │
+│  │ │ p   │ → Person Obj  │
+│  └────────────────────────┘  │
+└──────────────────────────────┘
+
+
+String name = new String("thakur");
+Sysetem.out.println(name.charAt(3));
+
+
+
+----------------------------
+Mutable And Immutable String
+----------------------------
+
+Strings are immuatable 
+
+String name = "thakur";
+name += "op";
+
+"thakur" stays unchanged in the String pool.
+"op" is also from the String pool.
+"thakurop" is a new object created on the heap, and name now points to this new object.
+
+
+------------------------------
+if we want to change the string 
+we need to use string buffer and string builder 
+
+String buffer : 
+StringBuffer sb = new StringBuffer("thakur");
+growth strategy (capacity * 2 + 2)
+
+
+it also reserves 16 spaces extra so that upon adding data continuous memory would be available
+
+
+String str = sb; // throws error as StringBuffer is different and String is different 
+
+String Buffer VS String Builder ;
+
+| Feature             | StringBuffer                                                        | StringBuilder                                                  |
+| ------------------- | ------------------------------------------------------------------- | -------------------------------------------------------------- |
+| **Thread Safety**   | **Synchronized** (thread-safe)                                      | **Not synchronized** (not thread-safe)                         |
+| **Performance**     | Slower due to synchronization overhead                              | Faster because no synchronization                              |
+| **Introduced in**   | Java 1.0                                                            | Java 5 (Java 1.5)                                              |
+| **Use case**        | Use when **multiple threads** might access/modify the same instance | Use when **only single thread** accesses/modifies the instance |
+| **Methods**         | Same API as StringBuilder                                           | Same API as StringBuffer                                       |
+| **Capacity growth** | Same growth strategy (capacity \* 2 + 2)                            | Same growth strategy (capacity \* 2 + 2)                       |
+| **Example**         | `StringBuffer sb = new StringBuffer("abc");`                        | `StringBuilder sb = new StringBuilder("abc");`                 |
+
+
+===========================================================================================================================
+
+
+
+[STATIC VARIABLE]
+===========================================================================================================================
+┌──────────────────────────────┐
+│         Method Area           │
+│  (Class Metadata + Static)    │
+├──────────────────────────────┤
+│  ┌────────────────────────┐  │
+│  │ static int count = 0   │  │  <-- Only one copy shared by all instances
+│  └────────────────────────┘  │
+│                              │
+│  Class info, methods, etc.    │
+└──────────────────────────────┘
+             ▲
+             │
+┌──────────────────────────────┐
+│            Heap              │
+│  ┌───────────────┐           │
+│  │ Counter obj c1│  ─────────┤─┐
+│  └───────────────┘           │ │ (Each object has no copy of `count`)
+│  ┌───────────────┐           │ │
+│  │ Counter obj c2│  ─────────┤─┤
+│  └───────────────┘           │ │
+│  ┌───────────────┐           │ │
+│  │ Counter obj c3│  ─────────┤─┘
+│  └───────────────┘           │
+└──────────────────────────────┘
+             ▲
+             │
+┌──────────────────────────────┐
+│            Stack             │
+│  main() frame                │
+│  ┌─────────────┐             │
+│  │Reference c1 │ ───────────►│ Heap (Counter object 1)
+│  │Reference c2 │ ───────────►│ Heap (Counter object 2)
+│  │Reference c3 │ ───────────►│ Heap (Counter object 3)
+│  └─────────────┘             │
+└──────────────────────────────┘
+
+
+
+
+
+┌─────────────────────────────────────────────┐
+│                Method Area                   │
+│  (shared among all class instances)          │
+├─────────────────────────────────────────────┤
+│  Class Metadata:                             │
+│  ┌──────────────────────────────────────┐  │
+│  │ Class Name, Superclass, Interfaces   │  │
+│  │ Field Descriptions                   │  │
+│  │ Method Descriptions (signatures)    │  │
+│  └──────────────────────────────────────┘  │
+│                                             │
+│  Static Variables:                           │
+│  ┌──────────────────────────────────────┐  │
+│  │ static int count                      │  │
+│  │ static String myStr                   │  │
+│  │ ...                                  │  │
+│  └──────────────────────────────────────┘  │
+│                                             │
+│  Runtime Constant Pool:                      │
+│  ┌──────────────────────────────────────┐  │
+│  │ Numeric literals, method refs, etc.  │  │
+│  └──────────────────────────────────────┘  │
+│                                             │
+│  String Pool (String Constant Pool):        │
+│  ┌──────────────────────────────────────┐  │
+│  │ "hello"                              │◄─┐│
+│  │ "world"                              │  ││ referenced by static & instance Strings
+│  │ "thakur"                             │  ││
+│  │ ...                                  │  │
+│  └──────────────────────────────────────┘  │
+│                                             │
+│  Method Bytecode & JVM Internals:           │
+│  ┌──────────────────────────────────────┐  │
+│  │ Method instructions, JVM internal data│ │
+│  └──────────────────────────────────────┘  │
+└─────────────────────────────────────────────┘
+===========================================================================================================================
+
+
+
+
+
+
+
+[STATIC KEYWORD]
+===========================================================================================================================
+static methods can be directly accessed without creating the object 
+Static methods cannot have non static variable directly i.e we can use it indirectly 
+
+Static blocks will get called first also before the constructor
+
+FIRST 
+the class loads then the objects are instantiated
+
+
+
+You can have multiple static blocks — they execute in the order they appear in the code.
+Static blocks cannot access non-static (instance) members directly.
+
+
+we can call a static block by loading a class which is done using 
+class.forNmae(className);
+
+===========================================================================================================================
+
+
+
+
+
+
+
+
+===========================================================================================================================
+[OOPS]
+===========================================================================================================================
+
+
+
+[ENCAPSULATION]
+===========================================================================================================================
+
+---------------------
+Getters And Setters
+---------------------
+
+
+┌──────────────────────────────┐
+│         Method Area          │
+│  - Class: Student            │
+│  - Method: setName()         │
+│  - Method: getName()         │
+│  - Method: setAge()          │
+│  - Method: getAge()          │
+└────────────┬─────────────────┘
+             │
+             ▼
+┌──────────────────────────────┐
+│             Heap             │
+│  ┌────────────────────────┐  │
+│  │   Student object (s)   │  │
+│  │  ┌──────────────────┐  │  │
+│  │  │ private name ="Thakur" │ ◄── Set via s.setName("Thakur")
+│  │  └──────────────────┘  │  │
+│  │  ┌──────────────────┐  │  │
+│  │  │ private age  = 20      │ ◄──── Set via s.setAge(20)
+│  │  └──────────────────┘  │  │
+│  └────────────────────────┘  │
+└──────────────────────────────┘
+
+
+
+
+----------------------
+without Encapsulation 
+----------------------
+
+┌──────────────────────────────┐
+│         Method Area          │
+│  - Class: Student            │
+│  - Fields: name (public)     │◄─ Directly accessible
+│            age (public)      │◄─ Directly accessible
+└────────────┬─────────────────┘
+             │
+             ▼
+┌──────────────────────────────┐
+│             Heap             │
+│  ┌────────────────────────┐  │
+│  │   Student object (s)   │  │
+│  │  ┌──────────────────┐  │  │
+│  │  │ name = "Thakur"  │◄──── Directly changed via s.name
+│  │  └──────────────────┘  │  │
+│  │  ┌──────────────────┐  │  │
+│  │  │ age  = 20        │◄──── Directly changed via s.age
+│  │  └──────────────────┘  │  │
+│  └────────────────────────┘  │
+└──────────────────────────────┘
+
+
+
+===========================================================================================================================
+
+
+
+
+
+[this KEYWORD]
+===========================================================================================================================
+
+🔹 Uses of this:
+Refers to current object: Inside a method or constructor.
+
+Resolve name conflict: Between instance variables and parameters.
+
+Invoke current class methods or constructors.
+
+Pass current object as a parameter.
+
+
+
+
+class Student {
+    String name;
+
+    Student(String name) {
+        this.name = name; // 'this.name' is instance variable, 'name' is parameter
+    }
+
+
+    void display() {
+        System.out.println("Name: " + this.name); // refers to current object
+    }
+}
+
+public class this_keyword {
+    public static void main(String[] args) {
+        Student obj  =  new Student("Thakur");
+        obj.display();
+    }    
+}
+
+
+
+---------------
+Layout Diagram
+---------------
+
+Heap Memory
+┌────────────────────────────┐
+│ Student Object (e.g., s1)  │
+│ ┌────────────────────────┐ │
+│ │ name: "Alice"          │◄┘ ← this.name
+│ └────────────────────────┘
+└────────────────────────────┘
+
+Stack Memory (for main thread)
+┌────────────────────────────┐
+│ Method: main()             │
+│ ┌────────────────────────┐ │
+│ │ s1 (ref to Student)    │────► Student object in Heap
+│ └────────────────────────┘ │
+└────────────────────────────┘
+
+┌────────────────────────────┐
+│ Method: display()          │
+│ ┌────────────────────────┐ │
+│ │ this → refers to s1    │────► Student object in Heap
+│ └────────────────────────┘ │
+└────────────────────────────┘
+
+===========================================================================================================================
+
+
+
+
+
+
+
+[constructor]
+===========================================================================================================================
+class Person {
+    String name;
+    int age;
+
+    // Constructor
+    Person(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    void display() {
+        System.out.println(name + " is " + age + " years old.");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Person p1 = new Person("Alice", 25);
+        p1.display();
+    }
+}
+
+
+
+┌──────────────────────────────┐
+│ Stack Memory (main thread)   │
+├──────────────────────────────┤
+│ main()                       │
+│ ┌──────────────────────────┐ │
+│ │ p1 → (reference)         │────┐
+│ └──────────────────────────┘ │  │
+└──────────────────────────────┘  │
+                                  ▼
+┌──────────────────────────────┐
+│ Heap Memory                  │
+├──────────────────────────────┤
+│ Person Object (e.g., @0x1a2b)│
+│ ┌──────────────────────────┐ │
+│ │ name = "Alice"           │
+│ │ age = 25                 │
+│ └──────────────────────────┘ │
+│ Constructor executed:       │
+│ Person("Alice", 25)         │
+└──────────────────────────────┘
+===========================================================================================================================
+
+
+
+
+[ANONYMOUS OBJECT]
+===========================================================================================================================
+
+class Hello {
+    void sayHello() {
+        System.out.println("Hello from anonymous object!");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        new Hello().sayHello(); // anonymous object
+    }
+}
+
+Stack Memory (main thread)
+┌─────────────────────────────┐
+│ Method: main()              │
+│ ┌─────────────────────────┐ │
+│ │ No reference stored     │ │
+│ └─────────────────────────┘ │
+└─────────────────────────────┘
+              │
+              ▼
+Heap Memory
+┌─────────────────────────────┐
+│ Hello Object (@0xABC)       │
+│ ┌─────────────────────────┐ │
+│ │ sayHello() logic loaded │ │
+│ └─────────────────────────┘ │
+└─────────────────────────────┘
+    (Will be eligible for GC after method call)
+
+
+===========================================================================================================================
+
+
+
+
+[INHERITANCE]
+===========================================================================================================================
+
+SINGLE LEVEL INHERITANCE
+------------------------
+class Animal {
+    void sound() {
+        System.out.println("Animal makes a sound");
+    }
+}
+
+class Dog extends Animal {
+    void bark() {
+        System.out.println("Dog barks");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Dog d = new Dog();
+        d.sound(); // Inherited from Animal
+        d.bark();  // Defined in Dog
+    }
+}
+
+
+Stack Memory (main thread)
+┌──────────────────────────────┐
+│ Method: main()               │
+│ ┌──────────────────────────┐ │
+│ │ d → reference to Dog     │────┐
+│ └──────────────────────────┘ │  │
+└──────────────────────────────┘  │
+                                 ▼
+Heap Memory
+┌────────────────────────────────┐
+│ Dog Object (@0x123)            │
+│ ┌────────────────────────────┐ │
+│ │ Inherited from Animal:     │ │
+│ │ - sound()                  │ │
+│ ├────────────────────────────┤ │
+│ │ Dog-specific:              │ │
+│ │ - bark()                   │ │
+│ └────────────────────────────┘ │
+└────────────────────────────────┘
+
+
+MULTI-LEVEL INHERITANCE
+-----------------------
+
+class Animal {
+    void eat() {
+        System.out.println("Animal eats");
+    }
+}
+
+class Dog extends Animal {
+    void bark() {
+        System.out.println("Dog barks");
+    }
+}
+
+class Puppy extends Dog {
+    void weep() {
+        System.out.println("Puppy weeps");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Puppy p = new Puppy();
+        p.eat();   // from Animal
+        p.bark();  // from Dog
+        p.weep();  // from Puppy
+    }
+}
+
+
+Stack Memory
+┌────────────────────┐
+│ main()             │
+│ ┌────────────────┐ │
+│ │ p → Puppy obj  │────┐
+│ └────────────────┘ │  │
+└────────────────────┘  ▼
+
+Heap Memory
+┌────────────────────────────┐
+│ Puppy Object (@0x2b3c)     │
+│ ┌────────────────────────┐ │
+│ │ eat() - from Animal     │ │
+│ │ bark() - from Dog       │ │
+│ │ weep() - from Puppy     │ │
+│ └────────────────────────┘ │
+└────────────────────────────┘
+
+
+===========================================================================================================================
+
+
+[this and super]
+===========================================================================================================================
+
+there is a method inside every constructor which isn't visible i.e 
+super();
+
+
+---------------------
+:::::Super usages::::
+---------------------
+Call the parent class constructor
+Call the parent class method
+Access the parent class field
+
+
+********
+every class in java extends from object class 
+********
+
+
+
+class Animal {
+    String type = "Animal";
+
+    Animal() {
+        System.out.println("Animal constructor called");
+    }
+
+    void makeSound() {
+        System.out.println("Animal sound");
+    }
+}
+
+class Dog extends Animal {
+    String type = "Dog";
+
+    Dog() {
+        super(); // 1. Call parent class constructor
+        System.out.println("Dog constructor called");
+    }
+
+    void displayType() {
+        System.out.println("Type: " + super.type); // 3. Access parent class field
+    }
+
+    void makeSound() {
+        super.makeSound(); // 2. Call parent class method
+        System.out.println("Dog barks");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Dog d = new Dog();
+        d.displayType();
+        d.makeSound();
+    }
+}
+
+| Usage           | Code                | Explanation                                                  |
+| --------------- | ------------------- | ------------------------------------------------------------ |
+| **Constructor** | `super();`          | Calls `Animal`'s constructor from `Dog`                      |
+| **Field**       | `super.type`        | Accesses `type` from `Animal`, not from `Dog`                |
+| **Method**      | `super.makeSound()` | Calls `Animal`'s `makeSound()` before adding custom behavior |
+
+
+
+(can we execute both the constructor using only one object? ) 
+yes using this 
+
+class A{
+    A(){
+        System.out.println("IN A");
+    }
+    A(int n ){
+        System.out.println("In A"+" "+n);
+    }
+
+}
+
+class B extends A{
+    B(){
+        this(39);
+        System.out.println("In B");
+    }
+    B(int n){
+        System.out.println("In B"+" "+n);
+    }
+}
+
+public class thisAndSuper {
+    public static void main(String[] args) {
+        B obj = new B();
+    }
+}
+
+===========================================================================================================================
+
+
+[METHOD OVERRIDING]
+===========================================================================================================================
+Same name , same parameters with different body 
+
+if class extends from another class having same name and same parameters in both the classes 
+it will take the child class method if we create the object of child class which will override the method of class a
+
+| Requirement            | Description                                                          |
+| ---------------------- | -------------------------------------------------------------------- |
+| Method name            | Must be the same as in the parent class                              |
+| Parameters             | Must match exactly (same number, order, and type)                    |
+| Return type            | Must be same or subtype (called *covariant return type*)             |
+| Access modifier        | Must not be more restrictive than the overridden method              |
+| Non-final method       | The method in the superclass must not be `final` or `static`         |
+| `@Override` annotation | Recommended but not mandatory (helps catch mistakes at compile time) |
+
+
+
+CLASS STRUCTURE:
+
++---------------------+               +-------------------------+
+|     Superclass      |               |        Subclass         |
+|---------------------|               |-------------------------|
+| + displayInfo()     |  <--------+   | + displayInfo()         |
+|   (prints "Super")  |           |   |   (prints "Sub")        |
++---------------------+           |   +-------------------------+
+                                  |
+        Method Overriding (Same method name, signature, return type)
+
+RUNTIME BEHAVIOR:
+
+SuperClass obj1 = new SuperClass();
+obj1.displayInfo();   --> "Super"
+
+SuperClass obj2 = new SubClass();
+obj2.displayInfo();   --> "Sub"   <- Overridden method is called at runtime
+
+SubClass obj3 = new SubClass();
+obj3.displayInfo();   --> "Sub"
+
+===========================================================================================================================
+
+
+
+[ACCESS MODIFIER]
+===========================================================================================================================
+                             Java Access Modifiers
+                            +----------------------+
+                            |    Access Modifier   |
++--------------------------+----------------------+
+|        Modifier          |      Visibility       |
++--------------------------+----------------------+
+| public                   | Everywhere            |
+| protected                | Same class,           |
+|                          | Same package,         |
+|                          | Subclasses (even in   |
+|                          | different packages)   |
+| default (no modifier)    | Same class + package  |
+| private                  | Only in same class    |
++--------------------------+----------------------+
+
+          ↓ ACCESS SCOPE ↓
+
+          +-----------------------------+
+          | Class | Package | Subclass | World |
++---------+-------+---------+----------+--------+
+| public  |   ✔   |    ✔    |    ✔     |   ✔    |
+| protected|  ✔   |    ✔    |    ✔     |   ✘    |
+| default |   ✔   |    ✔    |    ✘     |   ✘    |
+| private |   ✔   |    ✘    |    ✘     |   ✘    |
++---------+-------+---------+----------+--------+
+
+===========================================================================================================================
+
+
+
+[POLYMORPHISM] -- SAME OBJECT HAVE DIFFERENT BEHAVIOR
+===========================================================================================================================
+1)COMPILE TIME POLYMORPHISM -- OVERLOADING
+2)RUN TIME POLYMORPHISM -- OVERRIDING
+
+
+| Type         | Also Called          | Example            | Resolved At  |
+| ------------ | -------------------- | ------------------ | ------------ |
+| Compile-Time | Static/Early Binding | Method Overloading | Compile-Time |
+| Run-Time     | Dynamic/Late Binding | Method Overriding  | Run-Time     |
+
+
+
+
+
+
+===========================================================================================================================
+
+
+
+
+[DYNAMIC METHOD DISPATCH]
+===========================================================================================================================
+
+Code example 
+
+
+class Animal {
+    void speak() {
+        System.out.println("Animal speaks");
+    }
+}
+
+class Dog extends Animal {
+    void speak() {
+        System.out.println("Dog barks");
+    }
+}
+
+class Cat extends Animal {
+    void speak() {
+        System.out.println("Cat meows");
+    }
+}
+
+
+Animal a;
+
+a = new Dog();  
+a.speak();    // Output: Dog barks
+
+a = new Cat();
+a.speak();    // Output: Cat meows
+
+
+
+
+
+             DYNAMIC METHOD DISPATCH
+             
+
+                 +-------------------+
+Reference Type ->|     Animal a      |
+                 +-------------------+
+                          |
+                          |       (actual object at runtime)
+                          ↓
+              +-------------------+         +-------------------+
+              |   Dog Object      |         |   Cat Object      |
+              +-------------------+         +-------------------+
+              | + speak()         |         | + speak()         |
+              |   "Dog barks"     |         |   "Cat meows"     |
+              +-------------------+         +-------------------+
+
+              [a = new Dog();]  →  a.speak()  →  Dog.barks()
+              [a = new Cat();]  →  a.speak()  →  Cat.meows()
+
+Resolution:
+-----------
+✔ `a` is of type Animal → compiler checks method exists in Animal
+✔ Object is Dog or Cat → JVM resolves actual method at **runtime**
+
+===========================================================================================================================
+
+
+[final]
+===========================================================================================================================
+final - variable ,class , method , class 
+
+final variable --- :: constants :: can't be changed 
+
+final class --- :: prevent any class to extend from the current class 
+
+final methods ---- :: prevents any method from subclass to override the current method 
+
+
+
+
+                FINAL KEYWORD STRUCTURE
+
+               +-------------------------+
+               |       Shape (final)     |  ❌ Cannot be extended
+               +-------------------------+
+               | final double PI = 3.14  |  ✅ Value can't be changed
+               |                         |
+               | final void displayType()|  ❌ Can't be overridden
+               +-------------------------+
+                          ↑
+                          |
+                class Circle extends Shape  ❌ ERROR!
+                  (Cannot extend final class)
+
+    Memory Behavior:
+    ----------------
+    Heap:
+      Shape Object:
+        ├── PI = 3.14159 (final)  ✅ read-only
+        └── Method table:
+             displayType() → Bound to Shape at compile time (non-overridable)
+
+    Stack:
+      s → reference to Shape object on heap
+
+
+===========================================================================================================================
+
+
+
+
+[OBJECT CLASS]
+===========================================================================================================================
+Whenever we want to print an object of any class it will call the toString() method from the object Class as shown in the below example 
+
+---------------------------
+class Laptop{
+    String model;
+    int price ;
+}
+
+
+public class ObjectClass {
+    public static void main(String[] args) {
+        Laptop obj= new Laptop();
+        obj.model="Lenevo";
+        obj.price=45000;
+        System.out.println(obj);
+    }
+}
+
+---------------------------
+
+
+class Laptop{
+    String model;
+    int price ;
+}
+
+
+public class ObjectClass {
+    public static void main(String[] args) {
+        Laptop obj= new Laptop();
+        obj.model="Lenevo";
+        obj.price=45000;
+        System.out.println(obj.toString());
+    }
+}
+---------------------------
+
+---------------------------
+both prints the same thing 
+---------------------------
+
+
+
+===========================================================================================================================
+
+
+
+
+[UPCASTING AND DOWNCASTING]
+===========================================================================================================================
+
+
+
+
+
+class Animal {
+    void sound() {
+        System.out.println("Animal sound");
+    }
+}
+
+class Dog extends Animal {
+    void bark() {
+        System.out.println("Dog barks");
+    }
+}
+
+Animal a = new Dog();  // Upcasting
+a.sound();             // Valid
+// a.bark();           // ❌ Compile-time error
+
+
+Animal a = new Dog();       // Upcasting
+Dog d = (Dog) a;            // Downcasting
+d.bark();                   // ✅ Safe if 'a' really refers to a Dog
+
+Animal a2 = new Animal();
+Dog d2 = (Dog) a2;          // ❌ Runtime error (ClassCastException)
+
+
+
+
+
+
+[ Animal a = new Dog(); ]
+     a
+     │
+     ▼
+  ┌──────────────┐
+  │  Dog Object  │
+  │--------------│
+  │ Animal part  │ ← accessible via 'a'
+  │--------------│
+  │ Dog part     │ ← not accessible via 'a'
+  └──────────────┘
+[ Dog d = (Dog) a; ] // Downcasting
+     d
+     │
+     ▼
+  ┌──────────────┐
+  │  Dog Object  │
+  │--------------│
+  │ Animal part  │
+  │--------------│
+  │ Dog part     │ ← accessible via 'd'
+  └──────────────┘
+
+
+===========================================================================================================================
+
+
+
+
+
+[WRAPPER CLASS]
+===========================================================================================================================
+In collection we use wrapper class instead of primitive data types 
+primitive data types : stack memory 
+wrappe class objects : heap memory 
+===========================================================================================================================
+
+
+
+[ABSTACT KEYWORD]
+===========================================================================================================================
+--- Defining a class ABSTACT without defining abstract method do have no issue 
+--- but defining a abstract method inside a class needs the class to be abstract .  
+--- You cannot create object of abstract class.
+
+
+abstract class Animal {
+    abstract void makeSound(); // abstract method
+
+    void eat() {
+        System.out.println("This animal eats food.");
+    }
+}
+
+class Dog extends Animal {
+    @Override
+    void makeSound() {
+        System.out.println("Bark");
+    }
+}
+
+
+               ┌────────────────────────┐
+               │     abstract class     │
+               │        Animal          │
+               ├────────────────────────┤
+               │ + eat()                │ ◄── Concrete method
+               │ + makeSound() ◄───────┐│ ◄── Abstract method
+               └────────────────────────┘
+                          ▲
+                          │ (extends)
+                          │
+               ┌────────────────────────┐
+               │         class          │
+               │         Dog            │
+               ├────────────────────────┤
+               │ + makeSound()          │ ◄── Overrides abstract method
+               └────────────────────────┘
+
+
+You cannot create an object of an abstract class: Animal a = new Animal(); ❌
+Abstract methods act like contracts—subclasses must implement them.
+Abstract classes can have both abstract and concrete methods.
+A subclass must be marked abstract too if it doesn’t implement all abstract methods.
+
+
+
+===========================================================================================================================
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[INNER CLASS]
+===========================================================================================================================
+public class Outer {
+    private String greeting = "Hello";
+
+    // Inner (non-static) class
+    public class Inner {
+        public void sayHello() {
+            // Can access Outer’s private field
+            System.out.println(greeting + " from Inner!");
+        }
+    }
+
+    public void createInner() {
+        Inner inner = new Inner();
+        inner.sayHello();
+    }
+}
+
+// Usage:
+Outer outer = new Outer();
+Outer.Inner inner = outer.new Inner();
+inner.sayHello();  // prints "Hello from Inner!"
+
+
+
+┌──────────────────────────────────┐
+│           class Outer           │
+│──────────────────────────────────│
+│ – private String greeting       │
+│                                  │
+│ + void createInner()            │
+│                                  │
+│   ┌──────────────────────────┐   │
+│   │      class Inner         │   │
+│   │──────────────────────────│   │
+│   │ + void sayHello()        │   │
+│   │   // uses greeting       │   │
+│   └──────────────────────────┘   │
+└──────────────────────────────────┘
+
+
+
+Outer o = new Outer();
+Outer.Inner i = o.new Inner();
+
+
+
+===========================================================================================================================
+
+
+
+
+[ANONYMOUS CLASS]
+===========================================================================================================================
+interface Greeting {
+    void sayHello();
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Greeting greeting = new Greeting() {
+            @Override
+            public void sayHello() {
+                System.out.println("Hello from Anonymous Class!");
+            }
+        };
+
+        greeting.sayHello();
+    }
+}
+
+┌────────────────────────────┐
+│       interface Greeting   │
+│────────────────────────────│
+│ + sayHello()               │
+└────────────┬───────────────┘
+             │
+     implements (ANONYMOUS)
+             ▼
+┌─────────────────────────────────────────────┐
+│    new Greeting() {                         │
+│        @Override                            │
+│        public void sayHello() {             │
+│            System.out.println("Hello");     │
+│        }                                     │
+│    }                                         │
+└─────────────────────────────────────────────┘
+
+
+
+===========================================================================================================================
+

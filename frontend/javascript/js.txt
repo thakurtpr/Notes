@@ -1,0 +1,78 @@
+-----------------------------------------------------------
+Refer this for Callbacks, Promises And Async And Await:=
+-----------------------------------------------------------
+https://docs.google.com/document/d/1545V2In9ksfvNNf6rkgFUj8ttXZ8prRdI7B2BOS5MGY/edit#heading=h.nl65q8j8csx5
+
+
+
+
+----------------------------------------
+Session And Local Storage
+----------------------------------------
+
+• Session Storage
+    Stores data temporarily for the duration of the session.
+    Data is deleted when the browser is closed or tab is closed.
+    Storage limit varies across browsers (typically 5-10 MB).
+    Data is stored as key-value pairs.
+
+• Local Storage
+    Stores data indefinitely until explicitly cleared.
+    Data persists even after the browser is closed or restarted.
+    Storage limit varies across browsers (typically 5-10 MB).
+    Data is stored as key-value pairs.
+
+• Key similarities
+    Both store data locally on the client-side.
+    Data is stored as key-value pairs.
+    Both support string data type.
+    Both have similar APIs.
+
+• Key differences
+    Persistence: Local Storage persists data indefinitely, while Session Storage deletes data when the session ends.
+    Scope: Local Storage is shared across all tabs and windows, while Session Storage is specific to each tab.
+
+
+• Use cases
+    Local Storage:
+         User preferences.
+        Caching frequently accessed resources.
+        Offline data storage.
+    Session Storage:
+        Temporary data storage.
+        Shopping cart data.
+        Form data.
+
+
+
+• Security considerations
+    Data stored in Local Storage and Session Storage is accessible to anyone with access to the browser.
+    Avoid storing sensitive data.
+
+
+• Browser support
+    Local Storage and Session Storage are supported by most modern browsers, including Chrome, Firefox, Safari, and Edge.
+
+
+
+
+• API
+    localStorage.setItem('key', 'value') - Set data.
+    localStorage.getItem('key') - Get data.
+    localStorage.removeItem('key') - Remove data.
+    localStorage.clear() - Clear all data.
+
+    sessionStorage.setItem('key', 'value') - Set data.
+    sessionStorage.getItem('key') - Get data.
+    sessionStorage.removeItem('key') - Remove data.
+    sessionStorage.clear() - Clear all data.
+
+
+
+
+
+
+----------------------------------------
+JavaScript Web Workers
+----------------------------------------
+

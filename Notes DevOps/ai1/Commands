@@ -1,0 +1,4 @@
+mv !(kind-cluster) kind-cluster/
+
+find . -mindepth 1 -maxdepth 1 ! -name 'kind-cluster'
+

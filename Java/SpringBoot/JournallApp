@@ -1,0 +1,18 @@
+--journalApp
+
+================================================================================================================
+
+================================================================================================================
+
+
+
+
+Path Variable and Params 
+
+    @GetMapping("/{id}")
+    public JournalEntry getEntry(@PathVariable Long id){
+        return journalEntries.get(id);
+    }
+
+this method is having pathVariable
+

@@ -1,0 +1,40 @@
+
+# This file is used to create a Kubernetes cluster using Kind (Kubernetes in Docker).
+# It defines a cluster with one control plane node and three worker nodes.
+# This is a Kind configuration file for creating a Kubernetes cluster with 4 nodes.
+# It includes one control plane node and three worker nodes.    
+Creating a Kind cluster with 4 nodes, including a control plane and 3 workers.
+---------------------------------------
+kind: Cluster
+apiVersion: kind.x-k8s.io/v1alpha4
+nodes:
+- role: control-plane
+  image: kindest/node:v1.31.2
+- role: worker
+  image: kindest/node:v1.31.2
+- role: worker
+  image: kindest/node:v1.31.2
+- role: worker
+  image: kindest/node:v1.31.2
+  extraPortMappings:
+  - containerPort: 80
+    hostPort: 80
+    protocol: TCP
+  - containerPort: 443
+    hostPort: 443
+    protocol: TCP
+---------------------------------------
+
+---------
+commands:  
+---------
+# To create the Kind cluster, run the following command:
+# Make sure you have Kind installed and configured on your system.
+# This command will create a cluster named 'kind-gke-cluster' using the configuration defined in 'kind.yml'.
+kind create cluster --name=kind-gke-cluster --config=kind.yml
+
+
+----------------------------------------------------
+kubectl cluster-info --context kind-kind-gke-cluster
+----------------------------------------------------
+
